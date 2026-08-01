@@ -8,3 +8,5 @@ License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
+URL: https://github.com/Brandokkan/ScRNAseqBSVA
+BugReports: https://github.com/Brandokkan/ScRNAseqBSVA/issues
