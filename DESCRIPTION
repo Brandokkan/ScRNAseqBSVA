@@ -1,10 +1,11 @@
 Package: ScRNAseqBSVA
-Title: What the Package Does (One Line, Title Case)
+Title: Single-cell clustering and labeling
 Version: 0.99.0
 Authors@R: 
     person("Brando Stanislao", "Vaccarino Aureli", , "brandostanislao.vaccarino@mail.polimi.it",
     role = c("aut", "cre"))
 Description: Package for single-cell lable asignment and evaluation using clustering approaches.
+    The package also handles data preprocessing
 License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -12,3 +13,8 @@ RoxygenNote: 8.0.0
 URL: https://github.com/Brandokkan/ScRNAseqBSVA
 BugReports: https://github.com/Brandokkan/ScRNAseqBSVA/issues
 biocViews: Clustering, DifferentialExpression, Preprocessing, SingleCell, Transcriptomics
+Imports: 
+    Seurat
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
