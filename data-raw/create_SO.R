@@ -1,4 +1,4 @@
-## code to prepare `SeuratObject` dataset goes here
+## code to prepare `SeuratObject` dataset
 mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
