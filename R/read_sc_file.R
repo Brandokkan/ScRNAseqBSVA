@@ -8,7 +8,12 @@
 setMethod("read_sc_file", signature(path = "character"), function(path, bar_path, gene_path,
                                                                   ...) {
   if (grepl(".mtx$", path)) {
-    ReadMtx(path, bar_path, gene_path, feature.column = 1, ...)
+    if (is.character(bar_path) & is.character(gene_path)) {
+      ReadMtx(path, bar_path, gene_path, feature.column = 1, ...)
+    } else {
+      stop("The suplied paths for the barcodes and/or gene names are not actually paths",
+           call. = FALSE)
+    }
   } else if (grepl(".csv$", path)) {
     read.csv(path, ...)
   } else if (grepl(".tsv$", path)) {
