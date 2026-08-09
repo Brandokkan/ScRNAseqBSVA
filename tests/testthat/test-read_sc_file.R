@@ -13,16 +13,33 @@ test_that("mtx files are read as a dgCmMatrix", {
 })
 
 test_that("csv files are read correctlly", {
-  expect_type(read_sc_file(csv_path), "list")
+  expect_s4_class(read_sc_file(csv_path), "dgCMatrix")
+})
+
+test_that("tsv files are read correctlly", {
+  expect_s4_class(read_sc_file(tsv_path), "dgCMatrix")
 })
 
 test_that("cell bar-codes and gene names are loaded correctlly into the
           dgCMatrix", {
+  gene_name_file <- read.csv(gene_path, header = FALSE, sep = "\t")$"V1"
+  bar_name_file <- read.csv(cell_path, header = FALSE, sep = "\t")$"V1"
+
   dgc_mat <- read_sc_file(mat_path, cell_path, gene_path)
   gene_name_mat <- as.vector(dgc_mat@Dimnames[[1]])
   bar_name_mat <- as.vector(dgc_mat@Dimnames[[2]])
-  gene_name_file <- read.csv(gene_path, header = FALSE, sep = "\t")$"V1"
-  bar_name_file <- read.csv(cell_path, header = FALSE, sep = "\t")$"V1"
+  expect_true(all.equal.character(bar_name_mat, bar_name_file))
+  expect_true(all.equal.character(gene_name_mat, gene_name_file))
+
+  dgc_mat <- read_sc_file(csv_path)
+  gene_name_mat <- as.vector(dgc_mat@Dimnames[[1]])
+  bar_name_mat <- as.vector(dgc_mat@Dimnames[[2]])
+  expect_true(all.equal.character(bar_name_mat, bar_name_file))
+  expect_true(all.equal.character(gene_name_mat, gene_name_file))
+
+  dgc_mat <- read_sc_file(tsv_path)
+  gene_name_mat <- as.vector(dgc_mat@Dimnames[[1]])
+  bar_name_mat <- as.vector(dgc_mat@Dimnames[[2]])
   expect_true(all.equal.character(bar_name_mat, bar_name_file))
   expect_true(all.equal.character(gene_name_mat, gene_name_file))
 })

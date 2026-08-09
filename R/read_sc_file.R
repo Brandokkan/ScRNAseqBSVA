@@ -4,6 +4,7 @@
 #' @param bar_path the path of the .tsv file containing the cells bar-codes
 #' @param gene_path the path of the .tsv file containing the names of the genes
 #' @importFrom Seurat ReadMtx
+#' @importFrom Matrix Matrix
 #' @export
 setMethod("read_sc_file", signature(path = "character"), function(path, bar_path, gene_path,
                                                                   ...) {
@@ -15,9 +16,11 @@ setMethod("read_sc_file", signature(path = "character"), function(path, bar_path
            call. = FALSE)
     }
   } else if (grepl(".csv$", path)) {
-    read.csv(path, row.names = 1, ...)
+    df_file <- read.csv(path, row.names = 1, ...)
+    Matrix(as.matrix(df_file), sparse = TRUE)
   } else if (grepl(".tsv$", path)) {
-    read.csv(path, sep = "\t", ...)
+    df_file <- read.csv(path, sep = "\t", row.names = 1, ...)
+    Matrix(as.matrix(df_file), sparse = TRUE)
   } else {
     stop("type of file not recognized or supported", call. = FALSE)
   }
