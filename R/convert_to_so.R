@@ -24,13 +24,14 @@ setMethod("convert_to_so", signature(sc_data = "character"), function(sc_data, m
 
   data <- do.call(read_sc_file, c(list(path = sc_data), read_args))
 
-  cso_fixed_val <- list(counts = data, min.cells, min.features)
+  cso_fixed_val <- list(counts = data, min.cells = min.cells, min.features = min.features)
   do.call(CreateSeuratObject, c(cso_fixed_val, cso_args))
 })
 
 #' @describeIn convert_to_so Method for a sparse counts matrix of class
 #'   \code{dgCMatrix}.
 #' @importClassesFrom Matrix dgCMatrix
+#' @importFrom Seurat CreateSeuratObject
 #' @export
 setMethod("convert_to_so", signature(sc_data = "dgCMatrix"), function(sc_data,
                                                                       min.cells = 3,

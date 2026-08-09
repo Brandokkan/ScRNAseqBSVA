@@ -15,7 +15,7 @@ setMethod("read_sc_file", signature(path = "character"), function(path, bar_path
            call. = FALSE)
     }
   } else if (grepl(".csv$", path)) {
-    read.csv(path, ...)
+    read.csv(path, row.names = 1, ...)
   } else if (grepl(".tsv$", path)) {
     read.csv(path, sep = "\t", ...)
   } else {

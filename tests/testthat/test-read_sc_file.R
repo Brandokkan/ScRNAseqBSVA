@@ -1,6 +1,8 @@
 mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
+csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
+tsv_path <- system.file("extdata", "sc_test.tsv", package = "ScRNAseqBSVA")
 empty_file_path <- system.file("extdata", "empty_test", package = "ScRNAseqBSVA")
 
 invalid_file_str <- "type of file not recognized or supported"
@@ -8,6 +10,10 @@ invalid_paths_str <- "The suplied paths for the barcodes and/or gene names are n
 
 test_that("mtx files are read as a dgCmMatrix", {
   expect_s4_class(read_sc_file(mat_path, cell_path, gene_path), "dgCMatrix")
+})
+
+test_that("csv files are read correctlly", {
+  expect_type(read_sc_file(csv_path), "list")
 })
 
 test_that("cell bar-codes and gene names are loaded correctlly into the
