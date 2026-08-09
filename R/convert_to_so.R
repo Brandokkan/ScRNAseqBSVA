@@ -11,10 +11,17 @@ setMethod("convert_to_so", signature(sc_data = "data.frame"), function(sc_data,
 
 #' @describeIn convert_to_so Method for a file path to a supported
 #'   single-cell data file (e.g. a .mtx or .csv file).
+#' @param rem_ens_name if \code{TRUE}, then an ENSEMBL suffix is assumed to be
+#'  present in the gene names and is removed.
+#' @param ens_reg what regular expression is used to recognize and substitute
+#'  the gene name from the ENSEMBL suffix.
+#'  Ignored if \code{rem_ens_name} is \code{FALSE}.
 #' @importFrom Seurat CreateSeuratObject
 #' @export
 setMethod("convert_to_so", signature(sc_data = "character"), function(sc_data, min.cells = 3,
                                                                       min.features = 200,
+                                                                      rem_ens_name = TRUE,
+                                                                      ens_reg = "_[^_]*$",
                                                                       ...) {
   dots <- list(...)
   cso_fixed_names <- c("counts", "min.cells", "min.features", "...")
@@ -22,9 +29,12 @@ setMethod("convert_to_so", signature(sc_data = "character"), function(sc_data, m
   cso_args <- dots[names(dots) %in% cso_formals]
   read_args <- dots[!names(dots) %in% cso_formals]
 
-  data <- do.call(read_sc_file, c(list(path = sc_data), read_args))
+  data.mtx <- do.call(read_sc_file, c(list(path = sc_data), read_args))
 
-  cso_fixed_val <- list(counts = data, min.cells = min.cells, min.features = min.features)
+  if (rem_ens_name) {
+    rownames(data.mtx) <- make.unique(sub(ens_reg, "", rownames(data.mtx)))
+  }
+  cso_fixed_val <- list(counts = data.mtx, min.cells = min.cells, min.features = min.features)
   do.call(CreateSeuratObject, c(cso_fixed_val, cso_args))
 })
 
