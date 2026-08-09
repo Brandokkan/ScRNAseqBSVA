@@ -6,16 +6,20 @@
 #'
 #' @param sc_data Object or path containing the single-cell data. See the Methods
 #'   section below for supported input classes.
+#' @param min.cells A gene must be expressed in at least this number of cells to
+#'  be included. Default is \code{min.cells = 3}.
+#' @param min.features A cell must express at least this number of genes to be
+#'  included. Default is \code{min.features = 200}.
 #' @param ... Additional arguments passed to
-#'   \code{\link[Seurat]{CreateSeuratObject}}, e.g. \code{project},
-#'   \code{min.cells}, \code{min.features}.
+#'   \code{\link[Seurat]{CreateSeuratObject}}, e.g. \code{project}
 #'
 #' @return A \code{Seurat} object.
 #'
 #' @seealso \code{\link[Seurat]{CreateSeuratObject}}
 #'
 #' @export
-setGeneric("convert_to_so", function(sc_data, ...) {
+setGeneric("convert_to_so", function(sc_data, min.cells = 3,
+                                     min.features = 200, ...) {
   standardGeneric("convert_to_so")
 })
 
