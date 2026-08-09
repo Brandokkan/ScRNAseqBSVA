@@ -8,21 +8,26 @@
 \title{Creates a Seurat object for single-cell analysis from a file or
 various variable types.}
 \usage{
-convert_to_so(sc_data, ...)
+convert_to_so(sc_data, min.cells = 3, min.features = 200, ...)
 
-\S4method{convert_to_so}{data.frame}(sc_data, ...)
+\S4method{convert_to_so}{data.frame}(sc_data, min.cells = 3, min.features = 200, ...)
 
-\S4method{convert_to_so}{character}(sc_data, ...)
+\S4method{convert_to_so}{character}(sc_data, min.cells = 3, min.features = 200, ...)
 
-\S4method{convert_to_so}{dgCMatrix}(sc_data, ...)
+\S4method{convert_to_so}{dgCMatrix}(sc_data, min.cells = 3, min.features = 200, ...)
 }
 \arguments{
 \item{sc_data}{Object or path containing the single-cell data. See the Methods
 section below for supported input classes.}
 
+\item{min.cells}{A gene must be expressed in at least this number of cells to
+be included. Default is \code{min.cells = 3}.}
+
+\item{min.features}{A cell must express at least this number of genes to be
+included. Default is \code{min.features = 200}.}
+
 \item{...}{Additional arguments passed to
-\code{\link[Seurat]{CreateSeuratObject}}, e.g. \code{project},
-\code{min.cells}, \code{min.features}.}
+\code{\link[Seurat]{CreateSeuratObject}}, e.g. \code{project}}
 }
 \value{
 A \code{Seurat} object.
@@ -37,7 +42,7 @@ dispatching on the class of \code{sc_data}.
 (genes x cells).
 
 \item \code{convert_to_so(character)}: Method for a file path to a supported
-single-cell data file (e.g. a 10x Genomics directory or \code{.h5} file).
+single-cell data file (e.g. a .mtx or .csv file).
 
 \item \code{convert_to_so(dgCMatrix)}: Method for a sparse counts matrix of class
 \code{dgCMatrix}.
