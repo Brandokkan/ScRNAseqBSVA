@@ -8,11 +8,12 @@ setMethod("convert_to_so", signature(sc_data = "data.frame"), function(sc_data, 
                                                                        rem_ens_name = TRUE,
                                                                        ens_reg = "_[^_]*$",
                                                                        ...) {
-  if (rem_ens_name) {
-    rownames(sc_data) <- make.unique(sub(ens_reg, "", rownames(sc_data)))
-  }
   mat_data <- Matrix(as.matrix(sc_data), sparse = TRUE)
-  CreateSeuratObject(counts = mat_data, min.cells, min.features, ...)
+  if (rem_ens_name) {
+    rownames(mat_data) <- make.unique(sub(ens_reg, "", rownames(mat_data)))
+  }
+
+  CreateSeuratObject(counts = mat_data, min.cells = min.cells, min.features =  min.features, ...)
 })
 
 #' @describeIn convert_to_so Method for a file path to a supported
@@ -52,5 +53,5 @@ setMethod("convert_to_so", signature(sc_data = "dgCMatrix"), function(sc_data, m
   if (rem_ens_name) {
     rownames(sc_data) <- make.unique(sub(ens_reg, "", rownames(sc_data)))
   }
-  CreateSeuratObject(counts = sc_data, min.cells, min.features, ...)
+  CreateSeuratObject(counts = sc_data, min.cells = min.cells, min.features = min.features, ...)
 })
