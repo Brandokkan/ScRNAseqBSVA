@@ -22,7 +22,7 @@ read_sc_file(path, ...)
 }
 \value{
 a variable containing the information in the file(s)
-in the corresponding format recognized formats
+in the form of a \code{dgCMatrix}.
 }
 \description{
 The output variable can be used for single-cell analysis
@@ -38,8 +38,10 @@ barcodes must also be submitted in .tsv format
 mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
-read_sc_file(mat_path, gene_path, cell_path)
+mtx_mat <- read_sc_file(mat_path, gene_path = gene_path, bar_path = cell_path)
+mtx_mat
 
 csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
-read_sc_file(csv_path, header = FALSE)
+csv_mat <- read_sc_file(csv_path)
+csv_mat
 }

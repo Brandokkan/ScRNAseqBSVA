@@ -69,7 +69,9 @@ A \code{Seurat} object.
 }
 \description{
 Creates a \code{Seurat} object for downstream single-cell analysis,
-dispatching on the class of \code{sc_data}.
+dispatching on the class of \code{sc_data}. By default, it filters
+cells and genes by min.cells and min.features and removes the ensemble
+suffix.
 }
 \section{Functions}{
 \itemize{
@@ -83,6 +85,22 @@ single-cell data file (e.g. a .mtx or .csv file).
 \code{dgCMatrix}.
 
 }}
+\examples{
+mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
+gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
+cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
+mtx_mat <- convert_to_so(mat_path, gene_path = gene_path, bar_path = cell_path)
+mtx_mat
+
+csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
+csv_mat <- convert_to_so(csv_path)
+csv_mat
+
+tsv_path <- system.file("extdata", "sc_test.tsv", package = "ScRNAseqBSVA")
+tsv_df <- read.table(tsv_path, header = TRUE, sep = "\t", row.names = 1)
+tsv_mat <- convert_to_so(tsv_df)
+tsv_mat
+}
 \seealso{
 \code{\link[Seurat]{CreateSeuratObject}}
 }

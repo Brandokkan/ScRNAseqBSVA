@@ -2,7 +2,9 @@
 #' various variable types.
 #'
 #' Creates a \code{Seurat} object for downstream single-cell analysis,
-#' dispatching on the class of \code{sc_data}.
+#' dispatching on the class of \code{sc_data}. By default, it filters
+#' cells and genes by min.cells and min.features and removes the ensemble
+#' suffix.
 #'
 #' @param sc_data Object or path containing the single-cell data. See the Methods
 #'   section below for supported input classes.
@@ -23,6 +25,21 @@
 #' @seealso \code{\link[Seurat]{CreateSeuratObject}}
 #'
 #' @export
+#' @examples
+#' mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
+#' gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
+#' cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
+#' mtx_mat <- convert_to_so(mat_path, gene_path = gene_path, bar_path = cell_path)
+#' mtx_mat
+#'
+#' csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
+#' csv_mat <- convert_to_so(csv_path)
+#' csv_mat
+#'
+#' tsv_path <- system.file("extdata", "sc_test.tsv", package = "ScRNAseqBSVA")
+#' tsv_df <- read.table(tsv_path, header = TRUE, sep = "\t", row.names = 1)
+#' tsv_mat <- convert_to_so(tsv_df)
+#' tsv_mat
 setGeneric("convert_to_so", function(sc_data, min.cells = 3,
                                      min.features = 200,
                                      rem_ens_name = TRUE,
@@ -44,17 +61,19 @@ setGeneric("convert_to_so", function(sc_data, min.cells = 3,
 #' @param ... additional parameters
 #'
 #' @return a variable containing the information in the file(s)
-#'  in the corresponding format recognized formats
+#'  in the form of a \code{dgCMatrix}.
 #'
 #' @export
 #' @examples
 #' mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 #' gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 #' cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
-#' read_sc_file(mat_path, gene_path, cell_path)
+#' mtx_mat <- read_sc_file(mat_path, gene_path = gene_path, bar_path = cell_path)
+#' mtx_mat
 #'
 #' csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
-#' read_sc_file(csv_path, header = FALSE)
+#' csv_mat <- read_sc_file(csv_path)
+#' csv_mat
 setGeneric("read_sc_file", function(path, ...) {
   standardGeneric("read_sc_file")
 })
