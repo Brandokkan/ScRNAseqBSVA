@@ -8,9 +8,23 @@
 \title{Creates a Seurat object for single-cell analysis from a file or
 various variable types.}
 \usage{
-convert_to_so(sc_data, min.cells = 3, min.features = 200, ...)
+convert_to_so(
+  sc_data,
+  min.cells = 3,
+  min.features = 200,
+  rem_ens_name = TRUE,
+  ens_reg = "_[^_]*$",
+  ...
+)
 
-\S4method{convert_to_so}{data.frame}(sc_data, min.cells = 3, min.features = 200, ...)
+\S4method{convert_to_so}{data.frame}(
+  sc_data,
+  min.cells = 3,
+  min.features = 200,
+  rem_ens_name = TRUE,
+  ens_reg = "_[^_]*$",
+  ...
+)
 
 \S4method{convert_to_so}{character}(
   sc_data,
@@ -21,7 +35,14 @@ convert_to_so(sc_data, min.cells = 3, min.features = 200, ...)
   ...
 )
 
-\S4method{convert_to_so}{dgCMatrix}(sc_data, min.cells = 3, min.features = 200, ...)
+\S4method{convert_to_so}{dgCMatrix}(
+  sc_data,
+  min.cells = 3,
+  min.features = 200,
+  rem_ens_name = TRUE,
+  ens_reg = "_[^_]*$",
+  ...
+)
 }
 \arguments{
 \item{sc_data}{Object or path containing the single-cell data. See the Methods
@@ -33,15 +54,15 @@ be included. Default is \code{min.cells = 3}.}
 \item{min.features}{A cell must express at least this number of genes to be
 included. Default is \code{min.features = 200}.}
 
-\item{...}{Additional arguments passed to
-\code{\link[Seurat]{CreateSeuratObject}}, e.g. \code{project}}
-
 \item{rem_ens_name}{if \code{TRUE}, then an ENSEMBL suffix is assumed to be
 present in the gene names and is removed.}
 
 \item{ens_reg}{what regular expression is used to recognize and substitute
 the gene name from the ENSEMBL suffix.
 Ignored if \code{rem_ens_name} is \code{FALSE}.}
+
+\item{...}{Additional arguments passed to
+\code{\link[Seurat]{CreateSeuratObject}}, e.g. \code{project}}
 }
 \value{
 A \code{Seurat} object.
