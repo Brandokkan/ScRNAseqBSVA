@@ -8,6 +8,11 @@
 #'   section below for supported input classes.
 #' @param min.cells A gene must be expressed in at least this number of cells to
 #'  be included. Default is \code{min.cells = 3}.
+#' @param rem_ens_name if \code{TRUE}, then an ENSEMBL suffix is assumed to be
+#'  present in the gene names and is removed.
+#' @param ens_reg what regular expression is used to recognize and substitute
+#'  the gene name from the ENSEMBL suffix.
+#'  Ignored if \code{rem_ens_name} is \code{FALSE}.
 #' @param min.features A cell must express at least this number of genes to be
 #'  included. Default is \code{min.features = 200}.
 #' @param ... Additional arguments passed to
@@ -19,7 +24,10 @@
 #'
 #' @export
 setGeneric("convert_to_so", function(sc_data, min.cells = 3,
-                                     min.features = 200, ...) {
+                                     min.features = 200,
+                                     rem_ens_name = TRUE,
+                                     ens_reg = "_[^_]*$",
+                                     ...) {
   standardGeneric("convert_to_so")
 })
 

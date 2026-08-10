@@ -1,21 +1,22 @@
 #' @describeIn convert_to_so Method for a \code{data.frame} of counts
 #'   (genes x cells).
 #' @importFrom Seurat CreateSeuratObject
+#' @importFrom Matrix Matrix
 #' @export
-setMethod("convert_to_so", signature(sc_data = "data.frame"), function(sc_data,
-                                                                       min.cells = 3,
+setMethod("convert_to_so", signature(sc_data = "data.frame"), function(sc_data, min.cells = 3,
                                                                        min.features = 200,
+                                                                       rem_ens_name = TRUE,
+                                                                       ens_reg = "_[^_]*$",
                                                                        ...) {
-  CreateSeuratObject(counts = sc_data, min.cells, min.features, ...)
+  if (rem_ens_name) {
+    rownames(sc_data) <- make.unique(sub(ens_reg, "", rownames(sc_data)))
+  }
+  mat_data <- Matrix(as.matrix(sc_data), sparse = TRUE)
+  CreateSeuratObject(counts = mat_data, min.cells, min.features, ...)
 })
 
 #' @describeIn convert_to_so Method for a file path to a supported
 #'   single-cell data file (e.g. a .mtx or .csv file).
-#' @param rem_ens_name if \code{TRUE}, then an ENSEMBL suffix is assumed to be
-#'  present in the gene names and is removed.
-#' @param ens_reg what regular expression is used to recognize and substitute
-#'  the gene name from the ENSEMBL suffix.
-#'  Ignored if \code{rem_ens_name} is \code{FALSE}.
 #' @importFrom Seurat CreateSeuratObject
 #' @export
 setMethod("convert_to_so", signature(sc_data = "character"), function(sc_data, min.cells = 3,
@@ -43,9 +44,13 @@ setMethod("convert_to_so", signature(sc_data = "character"), function(sc_data, m
 #' @importClassesFrom Matrix dgCMatrix
 #' @importFrom Seurat CreateSeuratObject
 #' @export
-setMethod("convert_to_so", signature(sc_data = "dgCMatrix"), function(sc_data,
-                                                                      min.cells = 3,
+setMethod("convert_to_so", signature(sc_data = "dgCMatrix"), function(sc_data, min.cells = 3,
                                                                       min.features = 200,
+                                                                      rem_ens_name = TRUE,
+                                                                      ens_reg = "_[^_]*$",
                                                                       ...) {
+  if (rem_ens_name) {
+    rownames(sc_data) <- make.unique(sub(ens_reg, "", rownames(sc_data)))
+  }
   CreateSeuratObject(counts = sc_data, min.cells, min.features, ...)
 })
