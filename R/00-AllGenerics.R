@@ -39,6 +39,8 @@ setGeneric("convert_to_so", function(sc_data, min.cells = 3,
 #' The output variable can be used for single-cell analysis
 #'
 #' @param path the path of the file containing the read counts
+#' @param bar_path the path of the .tsv file containing the cells bar-codes
+#' @param gene_path the path of the .tsv file containing the names of the genes
 #' @param ... additional parameters
 #'
 #' @return a variable containing the information in the file(s)
