@@ -77,3 +77,47 @@ setGeneric("convert_to_so", function(sc_data, min.cells = 3,
 setGeneric("read_sc_file", function(path, ...) {
   standardGeneric("read_sc_file")
 })
+
+
+#' Adds to a \code{SeuratObject} metadata the percentage of mitochondrial and
+#' ribosomal protein genes per cell.
+#'
+#' This function calculates and adds to the \code{SeuratObject} metadata, if
+#' not already present, the percentage of mitochondrial and ribosomal protein genes.
+#'
+#' @param so the \code{SeuratObject} that contains the data to visualize
+#' @param specie the specie from which the data was derived. Allows to know
+#'  the correct nomenclature of the gene names. it can be set as: human, mouse
+#'  or other. default value is human.
+#' @param mit_pat reg-ex pattern for finding the mitochondrial genes.
+#'  Only change if \code{specie} is set to "other".
+#' @param rib_pat reg-ex pattern for finding the ribosomal protein genes.
+#'  Only change if \code{specie} is set to "other".
+#' @param ... additional parameters
+#'
+#' @return the \code{SeuratObject} with the new metadata
+#'
+#' @export
+setGeneric("calculate_mt_rbp", function(so, specie = "human",
+                                        mit_pat = "^MT-", rib_pat = "^RP[LS]", ...) {
+  standardGeneric("calculate_mt_rbp")
+})
+
+
+#' Visualize, and calculate if needed, common metrics for cell quality control.
+#'
+#' This function streamlines the pipeline used to visualize cell quality control
+#' in Seurat for easier use. It returns violin plots for the number of feature,
+#' the number of counts, the percentage of mitochondrial DNA and the percentage
+#' of DNA that codes for ribosomal proteins per cell. The last two parameters are
+#' calculated if not already present in the \code{SeuratObject}.
+#'
+#' @inheritParams calculate_mt_rbp
+#'
+#' @return plots for common quality control parameters.
+#'
+#' @export
+setGeneric("cell_qc_vis", function(so, specie = "human",
+                                   mit_pat = "^MT-", rib_pat = "^RP[LS]", ...) {
+  standardGeneric("cell_qc_vis")
+})
