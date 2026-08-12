@@ -93,13 +93,17 @@ setGeneric("read_sc_file", function(path, ...) {
 #'  Only change if \code{specie} is set to "other".
 #' @param rib_pat reg-ex pattern for finding the ribosomal protein genes.
 #'  Only change if \code{specie} is set to "other".
+#' @param overwrite logical value to tell the function if it should overwrite
+#' the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
+#' while the values are not yet calculated, it raises an error.
 #' @param ... additional parameters
 #'
 #' @return the \code{SeuratObject} with the new metadata
 #'
 #' @export
 setGeneric("calculate_mt_rbp", function(so, specie = "human",
-                                        mit_pat = "^MT-", rib_pat = "^RP[LS]", ...) {
+                                        mit_pat = "^MT-", rib_pat = "^RP[LS]",
+                                        overwrite = FALSE, ...) {
   standardGeneric("calculate_mt_rbp")
 })
 

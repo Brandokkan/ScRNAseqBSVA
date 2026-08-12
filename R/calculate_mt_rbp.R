@@ -5,10 +5,19 @@
 setMethod("calculate_mt_rbp", signature(so = "Seurat"), function(so, specie = "human",
                                                             mit_pat = "^MT-",
                                                             rib_pat = "^RP[LS]",
+                                                            overwrite = FALSE,
                                                             ...) {
   added <- FALSE
 
-  if (!"percent.mt" %in% colnames(so@meta.data)) {
+  absence_mit <- !"percent.mt" %in% colnames(so@meta.data)
+  absence_rbp <- !"percent.rbp" %in% colnames(so@meta.data)
+
+  if ((absence_rbp | absence_mit) & overwrite) {
+    stop("Error. Overwrite was set to TRUE while one or both metadata are absent",
+         call. = FALSE)
+  }
+
+  if ((!"percent.mt" %in% colnames(so@meta.data)) | overwrite) {
     if (specie == "human") {
       so[["percent.mt"]] <- PercentageFeatureSet(so, pattern = "^MT-")
     } else if (specie == "mouse") {
@@ -20,7 +29,7 @@ setMethod("calculate_mt_rbp", signature(so = "Seurat"), function(so, specie = "h
     print("Added % of mitochondrial genes to SeuratObject")
   }
 
-  if (!"percent.rbp" %in% colnames(so@meta.data)) {
+  if ((!"percent.rbp" %in% colnames(so@meta.data)) | overwrite) {
     if (specie == "human") {
       so[["percent.rbp"]] <- PercentageFeatureSet(so, pattern = "^RP[LS]")
     } else if (specie == "mouse") {

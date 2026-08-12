@@ -11,6 +11,7 @@ calculate_mt_rbp(
   specie = "human",
   mit_pat = "^MT-",
   rib_pat = "^RP[LS]",
+  overwrite = FALSE,
   ...
 )
 
@@ -19,6 +20,7 @@ calculate_mt_rbp(
   specie = "human",
   mit_pat = "^MT-",
   rib_pat = "^RP[LS]",
+  overwrite = FALSE,
   ...
 )
 }
@@ -34,6 +36,10 @@ Only change if \code{specie} is set to "other".}
 
 \item{rib_pat}{reg-ex pattern for finding the ribosomal protein genes.
 Only change if \code{specie} is set to "other".}
+
+\item{overwrite}{logical value to tell the function if it should overwrite
+the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
+while the values are not yet calculated, it raises an error.}
 
 \item{...}{additional parameters}
 }
