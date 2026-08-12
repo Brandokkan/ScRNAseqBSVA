@@ -96,7 +96,6 @@ setGeneric("read_sc_file", function(path, ...) {
 #' @param overwrite logical value to tell the function if it should overwrite
 #' the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
 #' while the values are not yet calculated, it raises an error.
-#' @param ... additional parameters
 #'
 #' @return the \code{SeuratObject} with the new metadata
 #'
@@ -109,7 +108,7 @@ setGeneric("read_sc_file", function(path, ...) {
 #'
 setGeneric("calculate_mt_rbp", function(so, specie = "human",
                                         mit_pat = "^MT-", rib_pat = "^RP[LS]",
-                                        overwrite = FALSE, ...) {
+                                        overwrite = FALSE) {
   standardGeneric("calculate_mt_rbp")
 })
 
@@ -122,12 +121,16 @@ setGeneric("calculate_mt_rbp", function(so, specie = "human",
 #' of DNA that codes for ribosomal proteins per cell. The last two parameters are
 #' calculated if not already present in the \code{SeuratObject}.
 #'
+#' @param plt_show What kind of plots to show. R markdown is suggested for showing
+#'  both the scatter and violoin plots.
 #' @inheritParams calculate_mt_rbp
+#' @param ... additional parameters
 #'
 #' @return plots for common quality control parameters.
 #'
 #' @export
 setGeneric("cell_qc_vis", function(so, specie = "human",
-                                   mit_pat = "^MT-", rib_pat = "^RP[LS]", ...) {
+                                   mit_pat = "^MT-", rib_pat = "^RP[LS]",
+                                   plt_show = c("scat", "vln"), ...) {
   standardGeneric("cell_qc_vis")
 })

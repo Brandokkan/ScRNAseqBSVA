@@ -5,8 +5,7 @@
 setMethod("calculate_mt_rbp", signature(so = "Seurat"), function(so, specie = "human",
                                                             mit_pat = "^MT-",
                                                             rib_pat = "^RP[LS]",
-                                                            overwrite = FALSE,
-                                                            ...) {
+                                                            overwrite = FALSE) {
   added <- FALSE
 
   absence_mit <- !"percent.mt" %in% colnames(so@meta.data)

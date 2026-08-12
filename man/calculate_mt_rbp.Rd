@@ -11,8 +11,7 @@ calculate_mt_rbp(
   specie = "human",
   mit_pat = "^MT-",
   rib_pat = "^RP[LS]",
-  overwrite = FALSE,
-  ...
+  overwrite = FALSE
 )
 
 \S4method{calculate_mt_rbp}{Seurat}(
@@ -20,8 +19,7 @@ calculate_mt_rbp(
   specie = "human",
   mit_pat = "^MT-",
   rib_pat = "^RP[LS]",
-  overwrite = FALSE,
-  ...
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -40,8 +38,6 @@ Only change if \code{specie} is set to "other".}
 \item{overwrite}{logical value to tell the function if it should overwrite
 the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
 while the values are not yet calculated, it raises an error.}
-
-\item{...}{additional parameters}
 }
 \value{
 the \code{SeuratObject} with the new metadata

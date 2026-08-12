@@ -5,9 +5,23 @@
 \alias{cell_qc_vis,Seurat-method}
 \title{Visualize, and calculate if needed, common metrics for cell quality control.}
 \usage{
-cell_qc_vis(so, specie = "human", mit_pat = "^MT-", rib_pat = "^RP[LS]", ...)
+cell_qc_vis(
+  so,
+  specie = "human",
+  mit_pat = "^MT-",
+  rib_pat = "^RP[LS]",
+  plt_show = c("scat", "vln"),
+  ...
+)
 
-\S4method{cell_qc_vis}{Seurat}(so, specie = "human", mit_pat = "^MT-", rib_pat = "^RP[LS]", ...)
+\S4method{cell_qc_vis}{Seurat}(
+  so,
+  specie = "human",
+  mit_pat = "^MT-",
+  rib_pat = "^RP[LS]",
+  plt_show = c("scat", "vln"),
+  ...
+)
 }
 \arguments{
 \item{so}{the \code{SeuratObject} that contains the data to visualize}
@@ -21,6 +35,9 @@ Only change if \code{specie} is set to "other".}
 
 \item{rib_pat}{reg-ex pattern for finding the ribosomal protein genes.
 Only change if \code{specie} is set to "other".}
+
+\item{plt_show}{What kind of plots to show. R markdown is suggested for showing
+both the scatter and violoin plots.}
 
 \item{...}{additional parameters}
 }
