@@ -128,6 +128,12 @@ setGeneric("calculate_mt_rbp", function(so, specie = "human",
 #' @return plots for common quality control parameters.
 #'
 #' @export
+#' @examples
+#' data("so_mit_rbp")
+#'
+#' cell_qc_vis(so_mit_rbp, plt_show = "vln", specie = "mouse")
+#'
+#' cell_qc_vis(so_mit_rbp, plt_show = "scat", specie = "mouse")
 setGeneric("cell_qc_vis", function(so, plt_show, specie = "human",
                                    mit_pat = "^MT-", rib_pat = "^RP[LS]",
                                    overwrite = FALSE,

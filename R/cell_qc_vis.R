@@ -22,7 +22,7 @@ setMethod("cell_qc_vis", signature(so = "Seurat"), function(so, plt_show,
   scat_plot <- plot1 + plot2 + plot3
   print(scat_plot)
   } else {
-    stop("an invalid value was suplied to plt_show")
+    stop("an invalid value was suplied to plt_show", call. = FALSE)
   }
 
 })
