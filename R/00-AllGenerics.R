@@ -101,6 +101,12 @@ setGeneric("read_sc_file", function(path, ...) {
 #' @return the \code{SeuratObject} with the new metadata
 #'
 #' @export
+#' @examples
+#' csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
+#'
+#' so_mit_rbp <- convert_to_so(csv_path)
+#' so_mit_rbp <- calculate_mt_rbp(so_mit_rbp, specie = "mouse")
+#'
 setGeneric("calculate_mt_rbp", function(so, specie = "human",
                                         mit_pat = "^MT-", rib_pat = "^RP[LS]",
                                         overwrite = FALSE, ...) {
