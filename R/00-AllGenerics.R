@@ -131,6 +131,8 @@ setGeneric("calculate_mt_rbp", function(so, specie = "human",
 #' @export
 setGeneric("cell_qc_vis", function(so, specie = "human",
                                    mit_pat = "^MT-", rib_pat = "^RP[LS]",
-                                   plt_show = c("scat", "vln"), ...) {
+                                   overwrite = FALSE,
+                                   plt_show = c("scat", "vln"),
+                                   ...) {
   standardGeneric("cell_qc_vis")
 })
