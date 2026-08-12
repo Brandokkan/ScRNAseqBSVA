@@ -121,18 +121,16 @@ setGeneric("calculate_mt_rbp", function(so, specie = "human",
 #' of DNA that codes for ribosomal proteins per cell. The last two parameters are
 #' calculated if not already present in the \code{SeuratObject}.
 #'
-#' @param plt_show vector that contains What kind of plots to show. R markdown
-#' is suggested for showing both the scatter and violin plots.
+#' @param plt_show string that tells the method What kind of plots to show.
 #' @inheritParams calculate_mt_rbp
 #' @param ... additional parameters
 #'
 #' @return plots for common quality control parameters.
 #'
 #' @export
-setGeneric("cell_qc_vis", function(so, specie = "human",
+setGeneric("cell_qc_vis", function(so, plt_show, specie = "human",
                                    mit_pat = "^MT-", rib_pat = "^RP[LS]",
                                    overwrite = FALSE,
-                                   plt_show = c("scat", "vln"),
                                    ...) {
   standardGeneric("cell_qc_vis")
 })

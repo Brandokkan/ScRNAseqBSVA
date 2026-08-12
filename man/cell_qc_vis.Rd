@@ -7,26 +7,28 @@
 \usage{
 cell_qc_vis(
   so,
+  plt_show,
   specie = "human",
   mit_pat = "^MT-",
   rib_pat = "^RP[LS]",
   overwrite = FALSE,
-  plt_show = c("scat", "vln"),
   ...
 )
 
 \S4method{cell_qc_vis}{Seurat}(
   so,
+  plt_show,
   specie = "human",
   mit_pat = "^MT-",
   rib_pat = "^RP[LS]",
   overwrite = FALSE,
-  plt_show = c("scat", "vln"),
   ...
 )
 }
 \arguments{
 \item{so}{the \code{SeuratObject} that contains the data to visualize}
+
+\item{plt_show}{string that tells the method What kind of plots to show.}
 
 \item{specie}{the specie from which the data was derived. Allows to know
 the correct nomenclature of the gene names. it can be set as: human, mouse
@@ -41,9 +43,6 @@ Only change if \code{specie} is set to "other".}
 \item{overwrite}{logical value to tell the function if it should overwrite
 the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
 while the values are not yet calculated, it raises an error.}
-
-\item{plt_show}{vector that contains What kind of plots to show. R markdown
-is suggested for showing both the scatter and violin plots.}
 
 \item{...}{additional parameters}
 }
