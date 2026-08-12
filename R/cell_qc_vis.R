@@ -14,7 +14,7 @@ setMethod("cell_qc_vis", signature(so = "Seurat"), function(so, specie = "human"
   if ("vln" %in% plt_show) {
   vln_plt <- VlnPlot(so, features = c("nFeature_RNA", "nCount_RNA", "percent.mt", "percent.rbp"),
              ncol = 4, ...)
-  vln_plt
+  print(vln_plt)
   }
 
   if ("scat" %in% plt_show) {
@@ -22,7 +22,7 @@ setMethod("cell_qc_vis", signature(so = "Seurat"), function(so, specie = "human"
   plot2 <- FeatureScatter(so, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
   plot3 <- FeatureScatter(so, feature1 = "nCount_RNA", feature2 = "percent.rbp")
   scat_plot <- plot1 + plot2 + plot3
-  scat_plot
+  print(scat_plot)
   }
 
 })

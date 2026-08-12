@@ -42,8 +42,8 @@ Only change if \code{specie} is set to "other".}
 the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
 while the values are not yet calculated, it raises an error.}
 
-\item{plt_show}{What kind of plots to show. R markdown is suggested for showing
-both the scatter and violoin plots.}
+\item{plt_show}{vector that contains What kind of plots to show. R markdown
+is suggested for showing both the scatter and violin plots.}
 
 \item{...}{additional parameters}
 }

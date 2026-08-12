@@ -121,8 +121,8 @@ setGeneric("calculate_mt_rbp", function(so, specie = "human",
 #' of DNA that codes for ribosomal proteins per cell. The last two parameters are
 #' calculated if not already present in the \code{SeuratObject}.
 #'
-#' @param plt_show What kind of plots to show. R markdown is suggested for showing
-#'  both the scatter and violoin plots.
+#' @param plt_show vector that contains What kind of plots to show. R markdown
+#' is suggested for showing both the scatter and violin plots.
 #' @inheritParams calculate_mt_rbp
 #' @param ... additional parameters
 #'
