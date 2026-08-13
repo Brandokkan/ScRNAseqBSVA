@@ -159,6 +159,14 @@ setGeneric("cell_qc_vis", function(so, plt_show, specie = "human",
 #' @return the \code{SeuratObject} with the filtered cells removed.
 #'
 #' @export
+#' @examples
+#' data("so_mit_rbp")
+#'
+#' filtered_so <- automatic_filter(so_mit_rbp)
+#'
+#' ncol(so_mit_rbp)
+#' ncol(filtered_so)
+#'
 setGeneric("automatic_filter", function(so, up_per = 0.9,
                                         low_per = 0.1,
                                         mit_per = 0.95,
