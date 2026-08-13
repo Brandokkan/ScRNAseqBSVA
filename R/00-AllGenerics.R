@@ -140,3 +140,30 @@ setGeneric("cell_qc_vis", function(so, plt_show, specie = "human",
                                    ...) {
   standardGeneric("cell_qc_vis")
 })
+
+
+#' Automatic filtering of cells based on the percentiles.
+#'
+#' This function automatically filters cell by using the percentiles of
+#' the distributions of \code{nFeatures_RNA} and \code{percent.mt}.
+#'
+#' @param so the \code{SeuratObject} containing the cells to filter.
+#' @param up_per the upper percentile of \code{nFeature_RNA}. Cells that are
+#'  placed above this are discarded.
+#' @param low_per the lower percentile of \code{nFeature_RNA}. Cells that are
+#'  placed below this are discarded.
+#' @param mit_per percentile used to filter cells based on mitochondrial genes.
+#'  cells that have are placed below this are discarded.
+#' @param ... additional parameters.
+#'
+#' @return the \code{SeuratObject} with the filtered cells removed.
+#'
+#' @export
+setGeneric("automatic_filter", function(so, up_per = 0.9,
+                                        low_per = 0.1,
+                                        mit_per = 0.05,
+                                        ...) {
+  standardGeneric("automatic_filter")
+})
+
+
