@@ -2,9 +2,14 @@
 #' @export
 setMethod("automatic_filter", signature(so = "Seurat"), function(so, up_per = 0.9,
                                                                  low_per = 0.1,
-                                                                 mit_per = 0.05,
+                                                                 mit_per = 0.95,
                                                                  ...) {
-  per_feat <- quantile(so@meta.data$nFeatures_RNA, probs = c(low_per, up_per))
+  if (low_per >= up_per) {
+    stop("low_per was set as higher or equal compared to up_per",
+         call. = FALSE)
+  }
+
+  per_feat <- quantile(so@meta.data$nFeature_RNA, probs = c(low_per, up_per))
   per_mit <- quantile(so@meta.data$percent.mt, probs = c(mit_per))
 
   low_per_val <- per_feat[[1]]
