@@ -16,5 +16,6 @@ setMethod("automatic_filter", signature(so = "Seurat"), function(so, up_per = 0.
   up_per_val <- per_feat[[2]]
   mit_val <- per_mit[[1]]
 
-  subset(so, subset = nFeature_RNA > low_per_val & nFeature_RNA < up_per_val & percent.mt < mit_val)
+  subset(so, subset = nFeature_RNA > low_per_val & nFeature_RNA < up_per_val & percent.mt < mit_val,
+         ...)
 })
