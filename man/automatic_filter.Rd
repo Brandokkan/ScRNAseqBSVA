@@ -35,3 +35,12 @@ the distributions of \code{nFeatures_RNA} and \code{percent.mt}.
 \item \code{automatic_filter(Seurat)}: method to filter the cells
 
 }}
+\examples{
+data("so_mit_rbp")
+
+filtered_so <- automatic_filter(so_mit_rbp)
+
+ncol(so_mit_rbp)
+ncol(filtered_so)
+
+}

@@ -175,3 +175,31 @@ setGeneric("automatic_filter", function(so, up_per = 0.9,
 })
 
 
+#' Normalization of gene counts
+#'
+#' This function normalizes the counts inside a \code{SeuratObject} to
+#' make comparison between different cell expression levels.
+#' The default normalization is counts per ten thousand.
+#'
+#' @param so \code{SeuratObject} containing the counts to normalize
+#' @param loga Boolean value telling the function if it should output the
+#' logarithm of the normalized counts
+#' @param scale_factor the scale factor that multiplies the division in order
+#' to make it more human readable.
+#' @param ... additional parameters
+#'
+#' @return the \code{SeuratObject} with the normalized counts
+#'
+#' @export
+#' @examples
+#' data("so_mit_rbp")
+#'
+#' norm_so <- sc_normalization(so_mit_rbp)
+#' so_10k <- sc_normalization(so_mit_rbp, loga = FALSE)
+#' so_1 <- sc_normalization(so_mit_rbp, loga = FALSE, scale_factor = 1)
+#'
+setGeneric("sc_normalization", function(so, loga = TRUE,
+                                        scale_factor = 10000, ...) {
+  standardGeneric("sc_normalization")
+})
+

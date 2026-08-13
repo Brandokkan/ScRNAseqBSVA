@@ -24,3 +24,21 @@
 #' @format A `Seurat` object with 78 cells and 9337 features.
 #' @source Derived from Panglao dataset.
 "so_mit_rbp"
+
+#' Example single-cell object with an additional normalized count layer
+#'
+#' This Seurat object contains an additional layer called "data" that contains
+#' the normalized counts per ten thousand.
+#'
+#' @format A `Seurat` object with 78 cells and 9337 features.
+#' @source Derived from Panglao dataset.
+"so_norm"
+
+#' Example single-cell object with an additional log-normalized count layer
+#'
+#' This Seurat object contains an additional layer called "data" that contains
+#' the log-normalized counts per ten thousand.
+#'
+#' @format A `Seurat` object with 78 cells and 9337 features.
+#' @source Derived from Panglao dataset.
+"so_norm_log"
