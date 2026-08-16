@@ -5,6 +5,7 @@
 #' @importFrom Seurat RunPCA
 #' @importFrom Seurat FindNeighbors
 #' @importFrom Seurat FindClusters
+#' @importFrom Seurat VariableFeatures
 #' @export
 setMethod("sc_clustering", signature(so = "Seurat"), function(so,
                                                               n_var_genes = 2000,
