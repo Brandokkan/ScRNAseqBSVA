@@ -3,21 +3,27 @@
 \name{sc_deconvolute}
 \alias{sc_deconvolute}
 \alias{sc_deconvolute,Seurat,SummarizedExperiment-method}
+\alias{sc_deconvolute,SummarizedExperiment,SummarizedExperiment-method}
 \title{Function to predict cell type using a deconvolution approach.}
 \usage{
-sc_deconvolute(so, ref, diagnosis = TRUE)
+sc_deconvolute(so, ref, diagnosis = TRUE, lab_name = "label.main")
 
 \S4method{sc_deconvolute}{Seurat,SummarizedExperiment}(so, ref, diagnosis = TRUE)
+
+\S4method{sc_deconvolute}{SummarizedExperiment,SummarizedExperiment}(so, ref, diagnosis = TRUE, lab_name = "label.main")
 }
 \arguments{
 \item{so}{\code{SeuratObject} containing the cells}
 
-\item{ref}{the reference databsed used to predict the cell types in so. It must
+\item{ref}{the reference database used to predict the cell types in so. It must
 be one of: \code{SeuratObject}, \code{SummarizedExperiment} or \code{SingleCellExperiment}.
 examples are \code{pbmc3k} from SeuratData or \code{MouseRNAseqData} from celldex.}
 
 \item{diagnosis}{Boolean value to tell the function if it should also print
 plots and information regarding predicted cell types confidence.}
+
+\item{lab_name}{the name of the vector containing the names of the cell types
+in the reference database.}
 }
 \value{
 the \code{SeuratObject} with the predicted cell types in the meta.data
@@ -31,7 +37,11 @@ SummarizedExperiment and SingleCellExperiment.
 }
 \section{Functions}{
 \itemize{
-\item \code{sc_deconvolute(so = Seurat, ref = SummarizedExperiment)}: method used to predict cell types from a reference
-SummarizedExperiment dataset
+\item \code{sc_deconvolute(so = Seurat, ref = SummarizedExperiment)}: method used to predict cell types of a SeuratObject
+from a reference SummarizedExperiment dataset
+
+\item \code{sc_deconvolute(so = SummarizedExperiment, ref = SummarizedExperiment)}: method used to predict cell types in a
+SummarizedExperiment or SingleCellExperiment from a reference
+SummarizedExperiment or SingleCellExperiment dataset
 
 }}

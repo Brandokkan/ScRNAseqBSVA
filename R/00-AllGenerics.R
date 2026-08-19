@@ -236,17 +236,19 @@ setGeneric("sc_clustering", function(so, n_var_genes = 2000, k_par = 20,
 #' SummarizedExperiment and SingleCellExperiment.
 #'
 #' @param so \code{SeuratObject} containing the cells
-#' @param ref the reference databsed used to predict the cell types in so. It must
+#' @param ref the reference database used to predict the cell types in so. It must
 #' be one of: \code{SeuratObject}, \code{SummarizedExperiment} or \code{SingleCellExperiment}.
 #' examples are \code{pbmc3k} from SeuratData or \code{MouseRNAseqData} from celldex.
 #' @param diagnosis Boolean value to tell the function if it should also print
 #' plots and information regarding predicted cell types confidence.
+#' @param lab_name the name of the vector containing the names of the cell types
+#' in the reference database.
 #'
 #' @return the \code{SeuratObject} with the predicted cell types in the meta.data
 #' as "predictions".
 #'
 #' @export
-setGeneric("sc_deconvolute", function(so, ref, diagnosis = TRUE) {
+setGeneric("sc_deconvolute", function(so, ref, diagnosis = TRUE, lab_name = "label.main") {
   standardGeneric("sc_deconvolute")
 })
 

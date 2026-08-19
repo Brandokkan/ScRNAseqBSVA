@@ -40,4 +40,8 @@ importFrom(SingleR,
   plotDeltaDistribution,
   plotScoreHeatmap
 )
-importFrom(SummarizedExperiment,assayNames)
+importFrom(SummarizedExperiment,
+  assayNames,
+  colData,
+  colnames
+)
