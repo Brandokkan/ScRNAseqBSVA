@@ -3,7 +3,7 @@
 #' @importFrom SingleR plotScoreHeatmap
 #' @importFrom SingleR plotDeltaDistribution
 #' @export
-setMethod("prediction_diagnostics", singature(so = "Seurat"), function(so) {
+setMethod("prediction_diagnostics", signature(so = "Seurat"), function(so) {
   if ("predictions" %in% colnames(so@meta.data)) {
     predictions <- so$predictions
   } else {

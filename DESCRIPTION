@@ -11,17 +11,19 @@ Description: Package for single-cell lable asignment and evaluation using cluste
 License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 8.0.0
 URL: https://github.com/Brandokkan/ScRNAseqBSVA
 BugReports: https://github.com/Brandokkan/ScRNAseqBSVA/issues
 biocViews: Clustering, DifferentialExpression, Preprocessing, SingleCell, Transcriptomics
 Imports: 
     Matrix,
     methods,
-    Seurat
+    Seurat,
+    SingleR,
+    SummarizedExperiment
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: 
     R (>= 3.5)
 LazyData: true
+Config/roxygen2/version: 8.1.0

@@ -4,27 +4,40 @@ export(automatic_filter)
 export(calculate_mt_rbp)
 export(cell_qc_vis)
 export(convert_to_so)
+export(prediction_diagnostics)
 export(read_sc_file)
 export(sc_clustering)
+export(sc_deconvolute)
 export(sc_normalization)
 exportMethods(automatic_filter)
 exportMethods(calculate_mt_rbp)
 exportMethods(cell_qc_vis)
 exportMethods(convert_to_so)
+exportMethods(prediction_diagnostics)
 exportMethods(read_sc_file)
 exportMethods(sc_clustering)
+exportMethods(sc_deconvolute)
 exportMethods(sc_normalization)
 importClassesFrom(Matrix,dgCMatrix)
 importFrom(Matrix,Matrix)
-importFrom(Seurat,CreateSeuratObject)
-importFrom(Seurat,FeatureScatter)
-importFrom(Seurat,FindClusters)
-importFrom(Seurat,FindNeighbors)
-importFrom(Seurat,FindVariableFeatures)
-importFrom(Seurat,NormalizeData)
-importFrom(Seurat,PercentageFeatureSet)
-importFrom(Seurat,ReadMtx)
-importFrom(Seurat,RunPCA)
-importFrom(Seurat,ScaleData)
-importFrom(Seurat,VariableFeatures)
-importFrom(Seurat,VlnPlot)
+importFrom(Seurat,
+  CreateSeuratObject,
+  FeatureScatter,
+  FindClusters,
+  FindNeighbors,
+  FindVariableFeatures,
+  NormalizeData,
+  PercentageFeatureSet,
+  ReadMtx,
+  RunPCA,
+  ScaleData,
+  VariableFeatures,
+  VlnPlot,
+  as.SingleCellExperiment
+)
+importFrom(SingleR,
+  SingleR,
+  plotDeltaDistribution,
+  plotScoreHeatmap
+)
+importFrom(SummarizedExperiment,assayNames)
