@@ -227,3 +227,41 @@ setGeneric("sc_clustering", function(so, n_var_genes = 2000, k_par = 20,
   standardGeneric("sc_clustering")
 })
 
+
+#' Function to predict cell type using a deconvolution approach.
+#'
+#' This function use SingleR or Seurat, based on the type of reference database,
+#' to predict the cell type of a query database using a reference database with
+#' cell types already assigned. The reference database can be SeuratData,
+#' SummarizedExperiment and SingleCellExperiment.
+#'
+#' @param so \code{SeuratObject} containing the cells
+#' @param ref the reference databsed used to predict the cell types in so. It must
+#' be one of: \code{SeuratObject}, \code{SummarizedExperiment} or \code{SingleCellExperiment}.
+#' examples are \code{pbmc3k} from SeuratData or \code{MouseRNAseqData} from celldex.
+#' @param diagnosis Boolean value to tell the function if it should also print
+#' plots and information regarding predicted cell types confidence.
+#'
+#' @return the \code{SeuratObject} with the predicted cell types in the meta.data
+#' as "predictions".
+#'
+#' @export
+setGeneric("sc_deconvolute", function(so, ref, diagnosis = TRUE) {
+  standardGeneric("sc_deconvolute")
+})
+
+
+#' Function to plot information about the confidence of a cell type prediction
+#'
+#' This function produces plots and information from a \code{SeuratObject} that
+#' was passed through sc_deconvolute to gain insight about the confidence of the
+#' cell types predicted.
+#'
+#' @param so \code{SeuratObject} containig predicted cell types.
+#'
+#' @return plots and informations about the predicted cell types
+#'
+#' @export
+setGeneric("prediction_diagnostics", function(so) {
+  standardGeneric("prediction_diagnostics")
+})
