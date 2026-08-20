@@ -21,20 +21,24 @@ exportMethods(sc_normalization)
 importClassesFrom(Matrix,dgCMatrix)
 importFrom(Matrix,Matrix)
 importFrom(Seurat,
+  AddMetaData,
   CreateSeuratObject,
   FeatureScatter,
   FindClusters,
   FindNeighbors,
+  FindTransferAnchors,
   FindVariableFeatures,
   NormalizeData,
   PercentageFeatureSet,
   ReadMtx,
   RunPCA,
   ScaleData,
+  TransferData,
   VariableFeatures,
   VlnPlot,
   as.SingleCellExperiment
 )
+importFrom(SeuratObject,Layers)
 importFrom(SingleR,
   SingleR,
   plotDeltaDistribution,

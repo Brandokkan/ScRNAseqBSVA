@@ -4,6 +4,7 @@
 \alias{sc_deconvolute}
 \alias{sc_deconvolute,Seurat,SummarizedExperiment-method}
 \alias{sc_deconvolute,SummarizedExperiment,SummarizedExperiment-method}
+\alias{sc_deconvolute,Seurat,Seurat-method}
 \title{Function to predict cell type using a deconvolution approach.}
 \usage{
 sc_deconvolute(so, ref, diagnosis = TRUE, lab_name = "label.main")
@@ -11,6 +12,8 @@ sc_deconvolute(so, ref, diagnosis = TRUE, lab_name = "label.main")
 \S4method{sc_deconvolute}{Seurat,SummarizedExperiment}(so, ref, diagnosis = TRUE)
 
 \S4method{sc_deconvolute}{SummarizedExperiment,SummarizedExperiment}(so, ref, diagnosis = TRUE, lab_name = "label.main")
+
+\S4method{sc_deconvolute}{Seurat,Seurat}(so, ref, diagnosis = TRUE, lab_name = "seurat_annotations")
 }
 \arguments{
 \item{so}{\code{SeuratObject} containing the cells}
@@ -43,5 +46,8 @@ from a reference SummarizedExperiment dataset
 \item \code{sc_deconvolute(so = SummarizedExperiment, ref = SummarizedExperiment)}: method used to predict cell types in a
 SummarizedExperiment or SingleCellExperiment from a reference
 SummarizedExperiment or SingleCellExperiment dataset
+
+\item \code{sc_deconvolute(so = Seurat, ref = Seurat)}: method used to predict cell types in a
+SeuratObject from a reference SeuratObject
 
 }}
