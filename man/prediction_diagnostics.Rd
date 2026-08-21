@@ -3,11 +3,14 @@
 \name{prediction_diagnostics}
 \alias{prediction_diagnostics}
 \alias{prediction_diagnostics,Seurat-method}
+\alias{prediction_diagnostics,SummarizedExperiment-method}
 \title{Function to plot information about the confidence of a cell type prediction}
 \usage{
 prediction_diagnostics(so)
 
 \S4method{prediction_diagnostics}{Seurat}(so)
+
+\S4method{prediction_diagnostics}{SummarizedExperiment}(so)
 }
 \arguments{
 \item{so}{\code{SeuratObject} containig predicted cell types.}
@@ -23,6 +26,9 @@ cell types predicted.
 \section{Functions}{
 \itemize{
 \item \code{prediction_diagnostics(Seurat)}: method to plot different visualization
-tools useful to asses the accuracy of the predictions
+tools useful to asses the accuracy of the predictions in SeuratObjects
+
+\item \code{prediction_diagnostics(SummarizedExperiment)}: method to plot different visualization
+tools useful to asses the accuracy of the predictions in SUmmarizedExperiments
 
 }}

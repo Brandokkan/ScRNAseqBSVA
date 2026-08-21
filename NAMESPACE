@@ -41,7 +41,6 @@ importFrom(Seurat,
 importFrom(SeuratObject,Layers)
 importFrom(SingleR,
   SingleR,
-  plotDeltaDistribution,
   plotScoreHeatmap
 )
 importFrom(SummarizedExperiment,
@@ -49,3 +48,4 @@ importFrom(SummarizedExperiment,
   colData,
   colnames
 )
+importFrom(stats,heatmap)

@@ -7,7 +7,7 @@
 #' @importFrom SingleR SingleR
 #' @export
 setMethod("sc_deconvolute", signature(so = "Seurat", ref = "SummarizedExperiment"),
-          function(so, ref, diagnosis = TRUE) {
+          function(so, ref, diagnosis = TRUE, lab_name = "label.main") {
   sce <- as.SingleCellExperiment(so)
 
   if (!"logcounts" %in% assayNames(sce)) {
@@ -24,11 +24,11 @@ setMethod("sc_deconvolute", signature(so = "Seurat", ref = "SummarizedExperiment
   predictions <- SingleR(
     test    = sce,
     ref     = ref,
-    labels  = ref$label.main,
+    labels  = ref[[lab_name]],
     de.method = "classic"
   )
 
-  so$"predictions" <- predictions
+  so@misc$predictions <- predictions
 
   if (diagnosis) {
     prediction_diagnostics(so)
@@ -90,7 +90,7 @@ setMethod("sc_deconvolute", signature(so = "Seurat", ref = "Seurat"),
 
             if (!"data" %in% Layers(so[["RNA"]])) {
               stop("Error: data is not present in the query SeuratObject. Make sure
-                   the SeuratObject was LogNormalized", call. = FALSE )
+                   the query was LogNormalized", call. = FALSE )
             }
 
             if (!lab_name %in% colnames(ref@meta.data)) {

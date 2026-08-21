@@ -14,17 +14,21 @@ Roxygen: list(markdown = TRUE)
 URL: https://github.com/Brandokkan/ScRNAseqBSVA
 BugReports: https://github.com/Brandokkan/ScRNAseqBSVA/issues
 biocViews: Clustering, DifferentialExpression, Preprocessing, SingleCell, Transcriptomics
-Imports: 
+Imports:
     Matrix,
     methods,
+    pheatmap,
     Seurat,
     SingleR,
-    SummarizedExperiment
+    stats,
+    SummarizedExperiment,
+    viridis
 Suggests:
     testthat (>= 3.0.0),
     SeuratData,
     celldex,
-    scRNAseq
+    scRNAseq,
+    grDevices
 Config/testthat/edition: 3
 Depends: 
     R (>= 3.5)

@@ -9,7 +9,7 @@
 \usage{
 sc_deconvolute(so, ref, diagnosis = TRUE, lab_name = "label.main")
 
-\S4method{sc_deconvolute}{Seurat,SummarizedExperiment}(so, ref, diagnosis = TRUE)
+\S4method{sc_deconvolute}{Seurat,SummarizedExperiment}(so, ref, diagnosis = TRUE, lab_name = "label.main")
 
 \S4method{sc_deconvolute}{SummarizedExperiment,SummarizedExperiment}(so, ref, diagnosis = TRUE, lab_name = "label.main")
 
