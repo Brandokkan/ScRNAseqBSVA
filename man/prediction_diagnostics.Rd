@@ -32,3 +32,10 @@ tools useful to asses the accuracy of the predictions in SeuratObjects
 tools useful to asses the accuracy of the predictions in SUmmarizedExperiments
 
 }}
+\examples{
+suex_dataset <- celldex::MouseRNAseqData()
+
+suex_pred <- sc_deconvolute(suex_dataset, suex_dataset, diagnosis = FALSE)
+prediction_diagnostics(suex_pred)
+
+}

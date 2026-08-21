@@ -36,3 +36,10 @@ Jaccadrd similarity.
 them for clustering
 
 }}
+\examples{
+data("so_mit_rbp")
+norm_so <- sc_normalization(so_mit_rbp)
+
+sc_clustering(norm_so)
+
+}

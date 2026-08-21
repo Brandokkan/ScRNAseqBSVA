@@ -51,3 +51,21 @@ SummarizedExperiment or SingleCellExperiment dataset
 SeuratObject from a reference SeuratObject
 
 }}
+\examples{
+pbmc3k <- SeuratData::LoadData("pbmc3k")
+pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
+pbmc3k <- sc_normalization(pbmc3k)
+pbmc3k <- sc_clustering(pbmc3k)
+
+suex_dataset <- celldex::MouseRNAseqData()
+
+
+# SummarizedExperiment on SummarizedExperiment method
+sc_deconvolute(suex_dataset, suex_dataset)
+
+# Seurat on SummarizedExperiment method
+sc_deconvolute(pbmc3k, suex_dataset)
+
+# Seurat on Seurat method
+sc_deconvolute(pbmc3k, pbmc3k)
+}
