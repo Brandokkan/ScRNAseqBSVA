@@ -52,20 +52,25 @@ SeuratObject from a reference SeuratObject
 
 }}
 \examples{
-pbmc3k <- SeuratData::LoadData("pbmc3k")
-pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
-pbmc3k <- sc_normalization(pbmc3k)
-pbmc3k <- sc_clustering(pbmc3k)
+if (requireNamespace("celldex", quietly = TRUE)) {
+  suex_dataset <- celldex::MouseRNAseqData()
 
-suex_dataset <- celldex::MouseRNAseqData()
+  # SummarizedExperiment on SummarizedExperiment method
+  sc_deconvolute(suex_dataset, suex_dataset)
 
+  if (requireNamespace("pbmc3k.SeuratData", quietly = TRUE)) {
+    e <- new.env()
+    data("pbmc3k", package = "pbmc3k.SeuratData", envir = e)
+    pbmc3k <- e$pbmc3k
+    pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
+    pbmc3k <- sc_normalization(pbmc3k)
+    pbmc3k <- sc_clustering(pbmc3k)
 
-# SummarizedExperiment on SummarizedExperiment method
-sc_deconvolute(suex_dataset, suex_dataset)
+    # Seurat on SummarizedExperiment method
+    sc_deconvolute(pbmc3k, suex_dataset)
 
-# Seurat on SummarizedExperiment method
-sc_deconvolute(pbmc3k, suex_dataset)
-
-# Seurat on Seurat method
-sc_deconvolute(pbmc3k, pbmc3k)
+    # Seurat on Seurat method
+    sc_deconvolute(pbmc3k, pbmc3k)
+  }
+}
 }

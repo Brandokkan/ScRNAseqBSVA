@@ -1,8 +1,15 @@
+skip_if_not_installed("pbmc3k.SeuratData")
+skip_if_not_installed("celldex")
+skip_if_not_installed("scRNAseq")
+skip_if_not_installed("scuttle")
+
 data("so_mit_rbp")
 so_complete <- sc_normalization(so_mit_rbp)
 so_complete <- sc_clustering(so_complete)
 
-pbmc3k <- SeuratData::LoadData("pbmc3k")
+e <- new.env()
+data("pbmc3k", package = "pbmc3k.SeuratData", envir = e)
+pbmc3k <- e$pbmc3k
 pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
 pbmc3k <- sc_normalization(pbmc3k)
 pbmc3k <- sc_clustering(pbmc3k)

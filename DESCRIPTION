@@ -15,22 +15,27 @@ URL: https://github.com/Brandokkan/ScRNAseqBSVA
 BugReports: https://github.com/Brandokkan/ScRNAseqBSVA/issues
 biocViews: Clustering, DifferentialExpression, Preprocessing, SingleCell, Transcriptomics
 Imports:
+    grDevices,
     Matrix,
     methods,
     pheatmap,
     Seurat,
+    SeuratObject,
     SingleR,
     stats,
     SummarizedExperiment,
+    utils,
     viridis
 Suggests:
     testthat (>= 3.0.0),
     SeuratData,
+    pbmc3k.SeuratData,
     celldex,
     scRNAseq,
-    grDevices
+    scuttle
+Additional_repositories: http://seurat.nygenome.org/
 Config/testthat/edition: 3
 Depends: 
-    R (>= 3.5)
-LazyData: true
+    R (>= 4.6.0)
+LazyData: false
 Config/roxygen2/version: 8.1.0

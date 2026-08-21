@@ -8,7 +8,7 @@ setMethod("prediction_diagnostics", signature(so = "Seurat"), function(so) {
     predictions <- so@misc$predictions
 
     # Heatmap of per-cell scores across reference labels — look for clean diagonal blocks
-    plotScoreHeatmap(predictions)
+    plot_prediction_scores(predictions)
 
     # Cells where the top label wasn't clearly better than the runner-up get pruned to NA
     summary(is.na(predictions$pruned.labels))
@@ -52,7 +52,7 @@ setMethod("prediction_diagnostics", signature(so = "SummarizedExperiment"), func
     predictions <- so$predictions
 
     # Heatmap of per-cell scores across reference labels — look for clean diagonal blocks
-    plotScoreHeatmap(predictions)
+    plot_prediction_scores(predictions)
 
     # Cells where the top label wasn't clearly better than the runner-up get pruned to NA
     summary(is.na(predictions$pruned.labels))

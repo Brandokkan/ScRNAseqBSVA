@@ -3,6 +3,7 @@
 #'  barcodes must also be submitted in .tsv format
 #' @importFrom Seurat ReadMtx
 #' @importFrom Matrix Matrix
+#' @importFrom utils read.csv
 #' @export
 setMethod("read_sc_file", signature(path = "character"), function(path, bar_path, gene_path,
                                                                   ...) {

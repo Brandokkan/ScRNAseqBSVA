@@ -1,4 +1,5 @@
 #' @describeIn automatic_filter method to filter the cells
+#' @importFrom stats quantile
 #' @export
 setMethod("automatic_filter", signature(so = "Seurat"), function(so, up_per = 0.9,
                                                                  low_per = 0.1,

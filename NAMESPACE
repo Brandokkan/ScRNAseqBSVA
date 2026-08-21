@@ -48,4 +48,18 @@ importFrom(SummarizedExperiment,
   colData,
   colnames
 )
-importFrom(stats,heatmap)
+importFrom(grDevices,
+  dev.cur,
+  dev.set
+)
+importFrom(methods,
+  setGeneric,
+  setMethod
+)
+importFrom(pheatmap,pheatmap)
+importFrom(stats,
+  heatmap,
+  quantile
+)
+importFrom(utils,read.csv)
+importFrom(viridis,viridis)

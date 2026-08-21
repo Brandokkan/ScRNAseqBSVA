@@ -1,4 +1,9 @@
-pbmc3k <- SeuratData::LoadData("pbmc3k")
+skip_if_not_installed("pbmc3k.SeuratData")
+skip_if_not_installed("celldex")
+
+e <- new.env()
+data("pbmc3k", package = "pbmc3k.SeuratData", envir = e)
+pbmc3k <- e$pbmc3k
 pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
 pbmc3k <- sc_normalization(pbmc3k)
 pbmc3k <- sc_clustering(pbmc3k)

@@ -11,7 +11,7 @@ A \code{Seurat} object with 78 cells and 9337 features.
 Derived from Panglao dataset.
 }
 \usage{
-so_obj
+data(so_obj)
 }
 \description{
 A subsetted Seurat object used in examples and tests.

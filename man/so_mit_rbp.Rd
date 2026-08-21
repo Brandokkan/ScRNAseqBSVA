@@ -12,7 +12,7 @@ A \code{Seurat} object with 78 cells and 9337 features.
 Derived from Panglao dataset.
 }
 \usage{
-so_mit_rbp
+data(so_mit_rbp)
 }
 \description{
 A subsetted Seurat object used in examples and tests. The percentage of

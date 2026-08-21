@@ -11,7 +11,7 @@ A \code{Seurat} object with 78 cells and 9337 features.
 Derived from Panglao dataset.
 }
 \usage{
-so_norm_log
+data(so_norm_log)
 }
 \description{
 This Seurat object contains an additional layer called "data" that contains
