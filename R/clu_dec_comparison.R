@@ -25,13 +25,17 @@ setMethod("clu_dec_comparison", signature(so = "Seurat"), function(so) {
     cell_type
   )
 
-  comparison_table
-
   proportions_table <- prop.table(comparison_table, margin = 1)
-  proportions_table
 
-  pheatmap(
+  print(comparison_table)
+  print(proportions_table)
+
+  hm <- pheatmap(
     proportions_table,
     main = "Proportion of predicted cell types per cluster"
   )
+
+  invisible(list(counts       = comparison_table,
+                 proportions  = proportions_table,
+                 heatmap      = hm))
 })
