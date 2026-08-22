@@ -167,8 +167,8 @@ setGeneric("cell_qc_vis", function(so, plt_show, specie = "human",
 #' ncol(so_mit_rbp)
 #' ncol(filtered_so)
 #'
-setGeneric("automatic_filter", function(so, up_per = 0.9,
-                                        low_per = 0.1,
+setGeneric("automatic_filter", function(so, up_per = 0.95,
+                                        low_per = 0.05,
                                         mit_per = 0.95,
                                         ...) {
   standardGeneric("automatic_filter")

@@ -5,9 +5,9 @@
 \alias{automatic_filter,Seurat-method}
 \title{Automatic filtering of cells based on the percentiles.}
 \usage{
-automatic_filter(so, up_per = 0.9, low_per = 0.1, mit_per = 0.95, ...)
+automatic_filter(so, up_per = 0.95, low_per = 0.05, mit_per = 0.95, ...)
 
-\S4method{automatic_filter}{Seurat}(so, up_per = 0.9, low_per = 0.1, mit_per = 0.95, ...)
+\S4method{automatic_filter}{Seurat}(so, up_per = 0.95, low_per = 0.05, mit_per = 0.95, ...)
 }
 \arguments{
 \item{so}{the \code{SeuratObject} containing the cells to filter.}
