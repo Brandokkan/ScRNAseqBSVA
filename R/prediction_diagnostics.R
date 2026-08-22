@@ -18,8 +18,7 @@ setMethod("prediction_diagnostics", signature(so = "Seurat"), function(so) {
 
     if (length(score_cols) == 0) {
       stop("Error: no prediction.score columns were found in the meta.data.
-           Make sure sc_deconvolute was used with a SeuratObject reference
-           and query.",
+           Make sure sc_deconvolute was used with a SeuratObject reference.",
            call. = FALSE)
     }
 
