@@ -19,8 +19,9 @@ setMethod("cell_qc_vis", signature(so = "Seurat"), function(so, plt_show,
   plot1 <- FeatureScatter(so, feature1 = "nCount_RNA", feature2 = "percent.mt")
   plot2 <- FeatureScatter(so, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
   plot3 <- FeatureScatter(so, feature1 = "nCount_RNA", feature2 = "percent.rbp")
-  scat_plot <- plot1 + plot2 + plot3
-  print(scat_plot)
+  print(plot1)
+  print(plot2)
+  print(plot3)
   } else {
     stop("an invalid value was suplied to plt_show", call. = FALSE)
   }
