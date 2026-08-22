@@ -303,3 +303,22 @@ setGeneric("sc_deconvolute", function(so, ref, diagnosis = TRUE, lab_name = "lab
 setGeneric("prediction_diagnostics", function(so) {
   standardGeneric("prediction_diagnostics")
 })
+
+
+#' Function to compare the clusters to the predicted cell labels using
+#' deconvolution
+#'
+#' This function is useful to compare the final results of the clusters obtained
+#' from \code{sc_clustering} to the cell labels predicted by
+#' \code{sc_deconvolute}.
+#'
+#' @param so \code{SeuratObject} containing the clusters found by
+#' \code{sc_clustering} and the predicted cell labels found by
+#' \code{sc_deconvolute}
+#'
+#' @return prints tables and a heat-map to compare the two results
+#'
+#' @export
+setGeneric("clu_dec_comparison", function(so) {
+  standardGeneric("clu_dec_comparison")
+})
