@@ -32,10 +32,13 @@ Suggests:
     pbmc3k.SeuratData,
     celldex,
     scRNAseq,
-    scuttle
+    scuttle,
+    knitr,
+    rmarkdown
 Additional_repositories: http://seurat.nygenome.org/
 Config/testthat/edition: 3
 Depends: 
     R (>= 4.6.0)
 LazyData: false
 Config/roxygen2/version: 8.1.0
+VignetteBuilder: knitr

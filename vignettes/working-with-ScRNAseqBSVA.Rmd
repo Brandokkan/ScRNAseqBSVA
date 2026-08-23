@@ -1,0 +1,215 @@
+---
+title: "working-with-ScRNAseqBSVA"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{working-with-ScRNAseqBSVA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+ScRNAseqBSVA is a package made for easy single-cell data processing.
+
+It is mainly built around the package Seurat, which one of the most used package for single-cell analysis. It includes the SeuratObject, which is a all-in-one class that contains the raw cell data and the following data processing results that are performed in the code, similar to the SingleCellExperiment and SummarizedExperiment classes. Speaking of the SingleCellExperiment and SummarizedExperiment, they are considered the Bioconductor standards. Seurat also includes a function to easily convert a SeuratObject into one of the Bioconductor standard object (more on this in the code below), allowing for easy interface with other Bioconductor packages.
+
+ScRNAseqBSVA simplifies and builds on Seurat, combining multiple steps of standard workflows into single functions and providing additional information on the results of some of them. ScRNAseqBSVA also provides some additional functionality for automatic workflows and interface with functions of other packages with similar objectives.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# example workflow
+
+Here will be provided an example of a ScRNAseqBSVA workflow with descriptions for each step. Additional information is present in every function help page.
+
+```{r setup}
+library(ScRNAseqBSVA)
+```
+
+## loading a single-cell file
+
+The first step in any analysis is to load the dataset in R. to do that, ScRNAseqBSVA offers a dedicated function that supports some commonly used file type to store single-cell RNAseq data.
+
+```{r loading a file}
+mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
+gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
+cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
+mtx_mat <- read_sc_file(mat_path, gene_path = gene_path, bar_path = cell_path)
+
+csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
+csv_mat <- read_sc_file(csv_path)
+
+tsv_path <- system.file("extdata", "sc_test.tsv", package = "ScRNAseqBSVA")
+tsv_mat <- read_sc_file(tsv_path)
+```
+
+read_sc_file reads the file pointed by the path (in the example above, the same dummy dataset in different formats) and outputs a dgCMatrix object, which is a standard class used to store raw single-cell (sparse) data in a memory efficient way.
+
+read_sc_file supports the following formats:
+
+- .mtx
+- .csv
+- .tsv
+
+If the single-cell data is already loaded in R, then the following function must be used.
+
+## converting to a SeuratObject
+
+After obtaining the dgCMatrix, the next step is to convert it into the actual SeuratObject we will use in further analysis.
+
+```{r converting a dgCMatrix to a SeuratObject}
+so <- convert_to_so(mtx_mat)
+so
+```
+
+convert_to_so also automatically removes non-significant genes and cells and the ENSEMBL suffix often present in gene names. This behavior can be removed or tuned in the function parameters.
+
+It also supports data frames and paths as inputs. So, if one desires to go directly to a SeuratObject, the previous step with read_sc_file can be skipped.
+
+```{r convering a data frame into a SeuratObject}
+tsv_df <- read.table(tsv_path, header = TRUE, sep = "\t", row.names = 1)
+convert_to_so(tsv_df)
+```
+
+```{r going from a path directlly to the SeuratObject}
+convert_to_so(mat_path, gene_path = gene_path, bar_path = cell_path)
+```
+
+## Going from a SeuratObject to a SingleCellExperiment
+
+While not directly used by ScRNAseqBSVA, converting the SeuratObject obtained during the various steps in this pipeline can be useful for interfacing with other packages, and so, an example of how to perform this conversion is showed below.
+
+```{r converting a SeuratObject to a SingleCellExperiment}
+sce <- Seurat::as.SingleCellExperiment(so)
+```
+
+Addressing the warnings, it is best to convert the SeuratObject after the normalization step to have a data layer. But this works non the less.
+
+## filtering and quality control
+
+After obtaining the SeuratObject, quality control (QC) is performed to filter out genes and cells that fall below the QC parameters
+
+```{r quality control}
+# for a more realistic workflow, we will discard the dummy SeuratObject (so) from now in
+# favor of the pbmc3K dataset from SeuratData. Do not include this step in your own
+# pipeline. All following procedures are the same in any case, except for the initial filtering
+# done by convert_to_so, which will be performed again during the filtering.
+data("pbmc3k", package = "pbmc3k.SeuratData")
+pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
+
+# optional if cell_qc_vis is used, since it calculates this function by default
+pbmc3k <- calculate_mt_rbp(pbmc3k)
+```
+
+calculate_mt_rbp calculates the percentage of mitochondrial and ribosomal protein genes. Which are useful for QC.
+
+To see these QC parameters and other, cell_ac_vis is used.
+
+```{r Violin plot visualization, fig.width=7, fig.height=7}
+cell_qc_vis(pbmc3k, "vln")
+```
+
+```{r scatterplot QC visualization, fig.width=7, fig.height=7}
+cell_qc_vis(pbmc3k, "scat")
+```
+
+Two types of plot can be drawn by cell_qc_vis depending on the plt_show parameter:
+
+- "vln": prints the violin plots of:
+  - the total counts for each cell (nCount_RNA)
+  - the number of genes with a count greater than zero per cell (nFeatures_RNA)
+  - the percentage of mitochondrial genes in each cell (percent.mt)
+  - the percentage of ribosomal protein genes in each cell (percent.rbp)
+- "scat": prints the possible combinations of pair scatter plot of the first 3 variables listed above
+
+These parameters can be used to perform an informed filtering of the cells.
+
+If filtering based on the percentiles is of interest, the next function will be of use.
+
+```{r percentile-based filtering, fig.width=7, fig.height=7}
+pbmc3k <- automatic_filter(pbmc3k)
+
+cell_qc_vis(pbmc3k, "vln", overwrite = TRUE)
+cell_qc_vis(pbmc3k, "scat")
+```
+
+As we can see from the plots, automatic_filter trimmed the top and bottom cells in the violin plots.
+
+The percentiles used to trim the dataset can be freely changed to better filter different datasets.
+
+## normalization
+
+In order to compare the cells and do inference on them, they must be normalized.
+
+```{r normalization}
+pbmc3k <- sc_normalization(pbmc3k)
+head(pbmc3k[["RNA"]]$data)
+```
+
+The normalization is to divide each gene expression by the total counts for that cell, scaling by 10000 (the scale factor) and to take the natural logarithm.
+
+The scale factor and the decision to take the logarithm can be changed in the function parameters.
+
+## clustering
+
+Clustering based on the Louvain algorithm can be performed using the following function
+
+```{r clustering}
+pbmc3k <- sc_clustering(pbmc3k)
+head(pbmc3k@meta.data)
+```
+
+All the necessary pre-processing needed before clustering are performed using this function. This is why it is advisable to perform clustering before deconvolution.
+
+Clustering is performed in the PCA space, with a number of principal components that is automatically calculated to explain around 75% of the variance (capped at 50).
+
+the parameters of this function (especially the resolution) can be changed to obtain a different clustering result until it looks sound.
+
+NOTE: the meta data of pbmc3k contains the column "seurat_annotations" with the cell type of each cell. This is only because this is a standard dataset used as reference for others. The column is not the result of the prediction using deconvolution, which must still be performed.
+
+## deconvolution
+
+To predict the cell types based on their similarities with a databases with cell already labeled, the sc_deconvolute function can be used.
+
+```{r deconvolution}
+pbmc3k <- sc_deconvolute(pbmc3k, pbmc3k, diagnosis = FALSE)
+head(pbmc3k@meta.data$predicted.id, 30)
+```
+
+pbmc3k was used as the query and reference for sc_deconvolute. In a real scenario this would be wrong, since its going to give biased results, or impossible, because if the objective is to predict the cell type it means that we don't have them. Since this is just an example workflow, we think it's fine to leave it as is for demonstration purpose.
+
+To allow for an easier use and to avoid conversion problems, this function accepts SeuratObject, SummarizedExperiment and SingleCellExperiment objects as reference. Be aware that the resulting object will be slightly different based on what type of reference was used, but this is handled automatically by the following methods.
+
+The function also provides some visual representation of the deconvolution confidence in the prediction by default. However, it is advised to obtain this and other information separately with the following function to gain more insight.
+
+```{r deconvolution diagnostics, fig.width=7, fig.height=7}
+prediction_diagnostics(pbmc3k)
+```
+
+This function has two outputs:
+
+- The heatmap of the confidence of the call. Where each column is a cell and each row corresponds to a cell type. The intensity of the color (red in this case, but it can vary based on the type of reference used) represents the confidence that of the call for the cell type in that row.
+- A summary of the cells with low max confidence, were each cell that has a low confidence of the call is marked as TRUE
+
+## final comparison between clustering and deconvolution
+
+For a visual and numerical representation of the correlation between the clusters and the cell
+types found using deconvolution, the clu_dec_comparison function is used.
+
+```{r final comparison, fig.width=7, fig.height=7}
+clu_dec_comparison(pbmc3k)
+```
+
+The main output of this function is a heatmap. Where the intensity of the color represents
+the proportion of cells of the type in the column in the cluster in the row.
+The function also outputs the absolute and proportion numerical values in the console for
+a quantitative measurement.
+
+As we can see, the correlation between the clusters and cell type is pretty good. The only
+problematic cell types are DC and platelet, which do not seem to appear in any cluster,
+because they are few compared to the other types; and memory and naive CD4 T cells,
+which share cluster 0, because they have a very similar transcriptome.
