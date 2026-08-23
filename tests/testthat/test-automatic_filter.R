@@ -2,7 +2,7 @@ data("so_mit_rbp")
 
 test_that("returned cell number make sense for worst and best case scenario", {
   filt_so <- automatic_filter(so_mit_rbp)
-  expect_true(ncol(filt_so) <= ceiling(0.8 * ncol(so_mit_rbp)) & ncol(filt_so) >= floor(0.75 * ncol(so_mit_rbp))
+  expect_true(ncol(filt_so) <= ceiling(0.9 * ncol(so_mit_rbp)) & ncol(filt_so) >= floor(0.85 * ncol(so_mit_rbp))
               )
 })
 

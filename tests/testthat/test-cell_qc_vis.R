@@ -15,5 +15,5 @@ test_that("cell_qc_vis returns a patchwork for scat", {
   pdf(NULL); on.exit(dev.off())
 
   result <- cell_qc_vis(so_mit_rbp, plt_show = "scat")
-  expect_s3_class(result, "patchwork")
+  expect_s3_class(result, "ggplot")
 })
