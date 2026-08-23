@@ -4,7 +4,8 @@
 \alias{prediction_diagnostics}
 \alias{prediction_diagnostics,Seurat-method}
 \alias{prediction_diagnostics,SummarizedExperiment-method}
-\title{Function to plot information about the confidence of a cell type prediction}
+\title{Function to plot information about the confidence of a cell type
+prediction}
 \usage{
 prediction_diagnostics(so)
 
@@ -25,19 +26,23 @@ cell types predicted.
 }
 \section{Functions}{
 \itemize{
-\item \code{prediction_diagnostics(Seurat)}: method to plot different visualization
-tools useful to asses the accuracy of the predictions in SeuratObjects
+\item \code{prediction_diagnostics(Seurat)}: method to plot different
+visualization tools useful to asses the accuracy of the predictions in
+SeuratObjects
 
-\item \code{prediction_diagnostics(SummarizedExperiment)}: method to plot different visualization
-tools useful to asses the accuracy of the predictions in SUmmarizedExperiments
+\item \code{prediction_diagnostics(SummarizedExperiment)}: method to plot
+different visualization tools useful to asses the accuracy of the
+predictions in SUmmarizedExperiments
 
 }}
 \examples{
 if (requireNamespace("celldex", quietly = TRUE)) {
-  suex_dataset <- celldex::MouseRNAseqData()
+    suex_dataset <- celldex::MouseRNAseqData()
 
-  suex_pred <- sc_deconvolute(suex_dataset, suex_dataset, diagnosis = FALSE)
-  prediction_diagnostics(suex_pred)
+    suex_pred <- sc_deconvolute(suex_dataset, suex_dataset,
+        diagnosis = FALSE
+    )
+    prediction_diagnostics(suex_pred)
 }
 
 }

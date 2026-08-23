@@ -15,8 +15,8 @@
 #' @source Derived from Panglao dataset.
 "so_no_ens"
 
-#' Example single-cell object with percentage of mitochondrial and ribosomial
-#' genes calculated.
+#' Example single-cell object with percentage of mitochondrial and
+#' ribosomial genes calculated.
 #'
 #' A subsetted Seurat object used in examples and tests. The percentage of
 #' ribosomal and mitochondrial genes are already calculated for each cell.

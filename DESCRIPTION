@@ -1,21 +1,25 @@
 Package: ScRNAseqBSVA
 Title: Single-cell clustering and labeling
 Version: 0.99.0
-Authors@R: 
-    person("Brando Stanislao", "Vaccarino Aureli", , "brandostanislao.vaccarino@mail.polimi.it",
+Authors@R:
+    person("Brando Stanislao", "Vaccarino Aureli", ,
+    "brandostanislao.vaccarino@mail.polimi.it",
     role = c("aut", "cre"))
-Description: Package for single-cell lable asignment and evaluation using clustering approaches.
-    The package also handles data loading and preprocessing. This package is mainly built
-    around the Seurat package. It simplyfies and streamlines the most comonnly used Suerat
-    functions and steps used for single-cell data analysis.
+Description: Package for single-cell lable asignment and evaluation using
+    clustering approaches. The package also handles data loading and
+    preprocessing. This package is mainly built around the Seurat package.
+    It simplyfies and streamlines the most comonnly used Suerat functions
+    and steps used for single-cell data analysis.
 License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/Brandokkan/ScRNAseqBSVA
 BugReports: https://github.com/Brandokkan/ScRNAseqBSVA/issues
-biocViews: Clustering, DifferentialExpression, Preprocessing, SingleCell, Transcriptomics
+biocViews: Clustering, DifferentialExpression, Preprocessing, SingleCell,
+    Transcriptomics
 Imports:
     grDevices,
+    grid,
     Matrix,
     methods,
     pheatmap,

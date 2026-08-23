@@ -6,8 +6,8 @@
 #' cells and genes by min.cells and min.features and removes the ensemble
 #' suffix.
 #'
-#' @param sc_data Object or path containing the single-cell data. See the Methods
-#'   section below for supported input classes.
+#' @param sc_data Object or path containing the single-cell data. See the
+#'   Methods section below for supported input classes.
 #' @param min.cells A gene must be expressed in at least this number of cells to
 #'  be included. Default is \code{min.cells = 3}.
 #' @param rem_ens_name if \code{TRUE}, then an ENSEMBL suffix is assumed to be
@@ -29,7 +29,9 @@
 #' mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 #' gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 #' cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
-#' mtx_mat <- convert_to_so(mat_path, gene_path = gene_path, bar_path = cell_path)
+#' mtx_mat <- convert_to_so(mat_path,
+#'     gene_path = gene_path, bar_path = cell_path
+#' )
 #' mtx_mat
 #'
 #' csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
@@ -45,7 +47,7 @@ setGeneric("convert_to_so", function(sc_data, min.cells = 3,
                                      rem_ens_name = TRUE,
                                      ens_reg = "_[^_]*$",
                                      ...) {
-  standardGeneric("convert_to_so")
+    standardGeneric("convert_to_so")
 })
 
 
@@ -68,22 +70,25 @@ setGeneric("convert_to_so", function(sc_data, min.cells = 3,
 #' mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 #' gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 #' cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
-#' mtx_mat <- read_sc_file(mat_path, gene_path = gene_path, bar_path = cell_path)
+#' mtx_mat <- read_sc_file(mat_path,
+#'     gene_path = gene_path, bar_path = cell_path
+#' )
 #' mtx_mat
 #'
 #' csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")
 #' csv_mat <- read_sc_file(csv_path)
 #' csv_mat
 setGeneric("read_sc_file", function(path, ...) {
-  standardGeneric("read_sc_file")
+    standardGeneric("read_sc_file")
 })
 
 
-#' Adds to a \code{SeuratObject} metadata the percentage of mitochondrial and
-#' ribosomal protein genes per cell.
+#' Adds to a \code{SeuratObject} metadata the percentage of mitochondrial
+#' and ribosomal protein genes per cell.
 #'
 #' This function calculates and adds to the \code{SeuratObject} metadata, if
-#' not already present, the percentage of mitochondrial and ribosomal protein genes.
+#' not already present, the percentage of mitochondrial and ribosomal protein
+#' genes.
 #'
 #' @param so the \code{SeuratObject} that contains the data to visualize
 #' @param specie the specie from which the data was derived. Allows to know
@@ -94,8 +99,8 @@ setGeneric("read_sc_file", function(path, ...) {
 #' @param rib_pat reg-ex pattern for finding the ribosomal protein genes.
 #'  Only change if \code{specie} is set to "other".
 #' @param overwrite logical value to tell the function if it should overwrite
-#' the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
-#' while the values are not yet calculated, it raises an error.
+#' the current values of mitochondrial and ribosomal genes. If set to
+#' \code{TRUE} while the values are not yet calculated, it raises an error.
 #'
 #' @return the \code{SeuratObject} with the new metadata
 #'
@@ -109,17 +114,18 @@ setGeneric("read_sc_file", function(path, ...) {
 setGeneric("calculate_mt_rbp", function(so, specie = "human",
                                         mit_pat = "^MT-", rib_pat = "^RP[LS]",
                                         overwrite = FALSE) {
-  standardGeneric("calculate_mt_rbp")
+    standardGeneric("calculate_mt_rbp")
 })
 
 
-#' Visualize, and calculate if needed, common metrics for cell quality control.
+#' Visualize, and calculate if needed, common metrics for cell quality
+#' control.
 #'
 #' This function streamlines the pipeline used to visualize cell quality control
 #' in Seurat for easier use. It returns violin plots for the number of feature,
 #' the number of counts, the percentage of mitochondrial DNA and the percentage
-#' of DNA that codes for ribosomal proteins per cell. The last two parameters are
-#' calculated if not already present in the \code{SeuratObject}.
+#' of DNA that codes for ribosomal proteins per cell. The last two parameters
+#' are calculated if not already present in the \code{SeuratObject}.
 #'
 #' @param plt_show string that tells the method What kind of plots to show.
 #' @inheritParams calculate_mt_rbp
@@ -138,7 +144,7 @@ setGeneric("cell_qc_vis", function(so, plt_show, specie = "human",
                                    mit_pat = "^MT-", rib_pat = "^RP[LS]",
                                    overwrite = FALSE,
                                    ...) {
-  standardGeneric("cell_qc_vis")
+    standardGeneric("cell_qc_vis")
 })
 
 
@@ -171,7 +177,7 @@ setGeneric("automatic_filter", function(so, up_per = 0.95,
                                         low_per = 0.05,
                                         mit_per = 0.95,
                                         ...) {
-  standardGeneric("automatic_filter")
+    standardGeneric("automatic_filter")
 })
 
 
@@ -200,24 +206,25 @@ setGeneric("automatic_filter", function(so, up_per = 0.95,
 #'
 setGeneric("sc_normalization", function(so, loga = TRUE,
                                         scale_factor = 10000, ...) {
-  standardGeneric("sc_normalization")
+    standardGeneric("sc_normalization")
 })
 
 
 #' Function to find clusters using the most variable genes.
 #'
-#' This function first computes the most variable genes inside a \code{SeuratObject}
-#' and then uses them for finding clusters using a graph in which the nodes (cells)
-#' are connected to their K-nearest neighbors and. The edges are weighted using
-#' Jaccadrd similarity.
+#' This function first computes the most variable genes inside a
+#' \code{SeuratObject} and then uses them for finding clusters using a graph in
+#' which the nodes (cells) are connected to their K-nearest neighbors and. The
+#' edges are weighted using Jaccadrd similarity.
 #'
 #' @param so \code{SeuratObject} containing the cells
-#' @param n_var_genes the top number of variable genes used to compute the distances
-#' for clustering
+#' @param n_var_genes the top number of variable genes used to compute the
+#' distances for clustering
 #' @param k_par number of nearest neighbors used for constructing the graph
-#' @param res resolution. Higher values increase the number of clusters at the end.
-#' it is suggested to keep this value between 0.4 and 1.2 for data set of around
-#' 3K cells. The optimal number usually increases as the number of cells increases.
+#' @param res resolution. Higher values increase the number of clusters at the
+#' end. it is suggested to keep this value between 0.4 and 1.2 for data set of
+#' around 3K cells. The optimal number usually increases as the number of cells
+#' increases.
 #'
 #' @return the \code{SeuratObject} with the the clusters
 #'
@@ -230,7 +237,7 @@ setGeneric("sc_normalization", function(so, loga = TRUE,
 #'
 setGeneric("sc_clustering", function(so, n_var_genes = 2000, k_par = 20,
                                      res = 0.5) {
-  standardGeneric("sc_clustering")
+    standardGeneric("sc_clustering")
 })
 
 
@@ -242,46 +249,51 @@ setGeneric("sc_clustering", function(so, n_var_genes = 2000, k_par = 20,
 #' SummarizedExperiment and SingleCellExperiment.
 #'
 #' @param so \code{SeuratObject} containing the cells
-#' @param ref the reference database used to predict the cell types in so. It must
-#' be one of: \code{SeuratObject}, \code{SummarizedExperiment} or \code{SingleCellExperiment}.
-#' examples are \code{pbmc3k} from SeuratData or \code{MouseRNAseqData} from celldex.
+#' @param ref the reference database used to predict the cell types in so. It
+#' must be one of: \code{SeuratObject}, \code{SummarizedExperiment} or
+#' \code{SingleCellExperiment}. examples are \code{pbmc3k} from SeuratData or
+#' \code{MouseRNAseqData} from celldex.
 #' @param diagnosis Boolean value to tell the function if it should also print
 #' plots and information regarding predicted cell types confidence.
 #' @param lab_name the name of the vector containing the names of the cell types
 #' in the reference database.
 #'
-#' @return the \code{SeuratObject} with the predicted cell types in the meta.data
-#' as "predictions".
+#' @return the \code{SeuratObject} with the predicted cell types in the
+#' meta.data as "predictions".
 #'
 #' @export
 #' @examples
 #' if (requireNamespace("celldex", quietly = TRUE)) {
-#'   suex_dataset <- celldex::MouseRNAseqData()
+#'     suex_dataset <- celldex::MouseRNAseqData()
 #'
-#'   # SummarizedExperiment on SummarizedExperiment method
-#'   sc_deconvolute(suex_dataset, suex_dataset)
+#'     # SummarizedExperiment on SummarizedExperiment method
+#'     sc_deconvolute(suex_dataset, suex_dataset)
 #'
-#'   if (requireNamespace("pbmc3k.SeuratData", quietly = TRUE)) {
-#'     e <- new.env()
-#'     data("pbmc3k", package = "pbmc3k.SeuratData", envir = e)
-#'     pbmc3k <- e$pbmc3k
-#'     pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
-#'     pbmc3k <- sc_normalization(pbmc3k)
-#'     pbmc3k <- sc_clustering(pbmc3k)
+#'     if (requireNamespace("pbmc3k.SeuratData", quietly = TRUE)) {
+#'         e <- new.env()
+#'         data("pbmc3k", package = "pbmc3k.SeuratData", envir = e)
+#'         pbmc3k <- e$pbmc3k
+#'         pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
+#'         pbmc3k <- sc_normalization(pbmc3k)
+#'         pbmc3k <- sc_clustering(pbmc3k)
 #'
-#'     # Seurat on SummarizedExperiment method
-#'     sc_deconvolute(pbmc3k, suex_dataset)
+#'         # Seurat on SummarizedExperiment method
+#'         sc_deconvolute(pbmc3k, suex_dataset)
 #'
-#'     # Seurat on Seurat method
-#'     sc_deconvolute(pbmc3k, pbmc3k)
-#'   }
+#'         # Seurat on Seurat method
+#'         sc_deconvolute(pbmc3k, pbmc3k)
+#'     }
 #' }
-setGeneric("sc_deconvolute", function(so, ref, diagnosis = TRUE, lab_name = "label.main") {
-  standardGeneric("sc_deconvolute")
-})
+setGeneric(
+    "sc_deconvolute",
+    function(so, ref, diagnosis = TRUE, lab_name = "label.main") {
+        standardGeneric("sc_deconvolute")
+    }
+)
 
 
-#' Function to plot information about the confidence of a cell type prediction
+#' Function to plot information about the confidence of a cell type
+#' prediction
 #'
 #' This function produces plots and information from a \code{SeuratObject} that
 #' was passed through sc_deconvolute to gain insight about the confidence of the
@@ -294,14 +306,16 @@ setGeneric("sc_deconvolute", function(so, ref, diagnosis = TRUE, lab_name = "lab
 #' @export
 #' @examples
 #' if (requireNamespace("celldex", quietly = TRUE)) {
-#'   suex_dataset <- celldex::MouseRNAseqData()
+#'     suex_dataset <- celldex::MouseRNAseqData()
 #'
-#'   suex_pred <- sc_deconvolute(suex_dataset, suex_dataset, diagnosis = FALSE)
-#'   prediction_diagnostics(suex_pred)
+#'     suex_pred <- sc_deconvolute(suex_dataset, suex_dataset,
+#'         diagnosis = FALSE
+#'     )
+#'     prediction_diagnostics(suex_pred)
 #' }
 #'
 setGeneric("prediction_diagnostics", function(so) {
-  standardGeneric("prediction_diagnostics")
+    standardGeneric("prediction_diagnostics")
 })
 
 
@@ -321,15 +335,15 @@ setGeneric("prediction_diagnostics", function(so) {
 #' @export
 #' @examples
 #' if (requireNamespace("pbmc3k.SeuratData", quietly = TRUE)) {
-#'   data("pbmc3k", package = "pbmc3k.SeuratData")
-#'   pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
-#'   pbmc3k <- sc_normalization(pbmc3k)
-#'   pbmc3k <- sc_clustering(pbmc3k)
-#'   pbmc3k <- sc_deconvolute(pbmc3k, pbmc3k, diagnosis = FALSE)
+#'     data("pbmc3k", package = "pbmc3k.SeuratData")
+#'     pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
+#'     pbmc3k <- sc_normalization(pbmc3k)
+#'     pbmc3k <- sc_clustering(pbmc3k)
+#'     pbmc3k <- sc_deconvolute(pbmc3k, pbmc3k, diagnosis = FALSE)
 #'
-#'   clu_dec_comparison(pbmc3k)
+#'     clu_dec_comparison(pbmc3k)
 #' }
 #'
 setGeneric("clu_dec_comparison", function(so) {
-  standardGeneric("clu_dec_comparison")
+    standardGeneric("clu_dec_comparison")
 })

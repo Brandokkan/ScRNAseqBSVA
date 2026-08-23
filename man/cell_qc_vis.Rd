@@ -3,7 +3,8 @@
 \name{cell_qc_vis}
 \alias{cell_qc_vis}
 \alias{cell_qc_vis,Seurat-method}
-\title{Visualize, and calculate if needed, common metrics for cell quality control.}
+\title{Visualize, and calculate if needed, common metrics for cell quality
+control.}
 \usage{
 cell_qc_vis(
   so,
@@ -41,8 +42,8 @@ Only change if \code{specie} is set to "other".}
 Only change if \code{specie} is set to "other".}
 
 \item{overwrite}{logical value to tell the function if it should overwrite
-the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
-while the values are not yet calculated, it raises an error.}
+the current values of mitochondrial and ribosomal genes. If set to
+\code{TRUE} while the values are not yet calculated, it raises an error.}
 
 \item{...}{additional parameters}
 }
@@ -53,13 +54,13 @@ plots for common quality control parameters.
 This function streamlines the pipeline used to visualize cell quality control
 in Seurat for easier use. It returns violin plots for the number of feature,
 the number of counts, the percentage of mitochondrial DNA and the percentage
-of DNA that codes for ribosomal proteins per cell. The last two parameters are
-calculated if not already present in the \code{SeuratObject}.
+of DNA that codes for ribosomal proteins per cell. The last two parameters
+are calculated if not already present in the \code{SeuratObject}.
 }
 \section{Functions}{
 \itemize{
-\item \code{cell_qc_vis(Seurat)}: method to visualize (and calculate if necessary)
-quality control parameters.
+\item \code{cell_qc_vis(Seurat)}: method to visualize (and calculate if
+necessary) quality control parameters.
 
 }}
 \examples{

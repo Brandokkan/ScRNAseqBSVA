@@ -3,8 +3,8 @@
 \docType{data}
 \name{so_mit_rbp}
 \alias{so_mit_rbp}
-\title{Example single-cell object with percentage of mitochondrial and ribosomial
-genes calculated.}
+\title{Example single-cell object with percentage of mitochondrial and
+ribosomial genes calculated.}
 \format{
 A \code{Seurat} object with 78 cells and 9337 features.
 }

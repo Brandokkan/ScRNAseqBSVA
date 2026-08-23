@@ -12,19 +12,25 @@ names(pbmc3k_wrong_name@misc)[[1]] <- "wrong"
 
 
 test_that("The function works properlly", {
-  expect_no_error(clu_dec_comparison(pbmc3k_seu))
-  expect_no_error(clu_dec_comparison(pbmc3k_suex))
+    expect_no_error(clu_dec_comparison(pbmc3k_seu))
+    expect_no_error(clu_dec_comparison(pbmc3k_suex))
 })
 
 test_that("A SeuratObject with no clusters is rejected", {
-  expect_error(clu_dec_comparison(pbmc3k_no_clusters),
-               "no clusters were found in the SeuratObject")
+    expect_error(
+        clu_dec_comparison(pbmc3k_no_clusters),
+        "no clusters were found in the SeuratObject"
+    )
 })
 
 test_that("A SeuratObject with no predicted cell labels or with an invalid name
           for the element containing the predicted label is rejected", {
-  expect_error(clu_dec_comparison(pbmc3k_wrong_name),
-               "no predicted labels were found")
-  expect_error(clu_dec_comparison(pbmc3k),
-               "no predicted labels were found")
+    expect_error(
+        clu_dec_comparison(pbmc3k_wrong_name),
+        "no predicted labels were found"
+    )
+    expect_error(
+        clu_dec_comparison(pbmc3k),
+        "no predicted labels were found"
+    )
 })

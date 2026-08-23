@@ -3,8 +3,8 @@
 \name{calculate_mt_rbp}
 \alias{calculate_mt_rbp}
 \alias{calculate_mt_rbp,Seurat-method}
-\title{Adds to a \code{SeuratObject} metadata the percentage of mitochondrial and
-ribosomal protein genes per cell.}
+\title{Adds to a \code{SeuratObject} metadata the percentage of mitochondrial
+and ribosomal protein genes per cell.}
 \usage{
 calculate_mt_rbp(
   so,
@@ -36,20 +36,21 @@ Only change if \code{specie} is set to "other".}
 Only change if \code{specie} is set to "other".}
 
 \item{overwrite}{logical value to tell the function if it should overwrite
-the current values of mitochondrial and ribosomal genes. If set to \code{TRUE}
-while the values are not yet calculated, it raises an error.}
+the current values of mitochondrial and ribosomal genes. If set to
+\code{TRUE} while the values are not yet calculated, it raises an error.}
 }
 \value{
 the \code{SeuratObject} with the new metadata
 }
 \description{
 This function calculates and adds to the \code{SeuratObject} metadata, if
-not already present, the percentage of mitochondrial and ribosomal protein genes.
+not already present, the percentage of mitochondrial and ribosomal protein
+genes.
 }
 \section{Functions}{
 \itemize{
-\item \code{calculate_mt_rbp(Seurat)}: method to calculate the mitochondrial and ribosomal
-percentages.
+\item \code{calculate_mt_rbp(Seurat)}: method to calculate the mitochondrial and
+ribosomal percentages.
 
 }}
 \examples{

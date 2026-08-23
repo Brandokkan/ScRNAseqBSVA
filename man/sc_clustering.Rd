@@ -12,28 +12,29 @@ sc_clustering(so, n_var_genes = 2000, k_par = 20, res = 0.5)
 \arguments{
 \item{so}{\code{SeuratObject} containing the cells}
 
-\item{n_var_genes}{the top number of variable genes used to compute the distances
-for clustering}
+\item{n_var_genes}{the top number of variable genes used to compute the
+distances for clustering}
 
 \item{k_par}{number of nearest neighbors used for constructing the graph}
 
-\item{res}{resolution. Higher values increase the number of clusters at the end.
-it is suggested to keep this value between 0.4 and 1.2 for data set of around
-3K cells. The optimal number usually increases as the number of cells increases.}
+\item{res}{resolution. Higher values increase the number of clusters at the
+end. it is suggested to keep this value between 0.4 and 1.2 for data set of
+around 3K cells. The optimal number usually increases as the number of cells
+increases.}
 }
 \value{
 the \code{SeuratObject} with the the clusters
 }
 \description{
-This function first computes the most variable genes inside a \code{SeuratObject}
-and then uses them for finding clusters using a graph in which the nodes (cells)
-are connected to their K-nearest neighbors and. The edges are weighted using
-Jaccadrd similarity.
+This function first computes the most variable genes inside a
+\code{SeuratObject} and then uses them for finding clusters using a graph in
+which the nodes (cells) are connected to their K-nearest neighbors and. The
+edges are weighted using Jaccadrd similarity.
 }
 \section{Functions}{
 \itemize{
-\item \code{sc_clustering(Seurat)}: method for computing the most variable genes and use
-them for clustering
+\item \code{sc_clustering(Seurat)}: method for computing the most variable
+genes and use them for clustering
 
 }}
 \examples{

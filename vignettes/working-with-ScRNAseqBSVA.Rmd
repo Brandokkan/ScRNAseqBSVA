@@ -160,7 +160,7 @@ Clustering based on the Louvain algorithm can be performed using the following f
 
 ```{r clustering}
 pbmc3k <- sc_clustering(pbmc3k)
-head(pbmc3k@meta.data)
+head(pbmc3k[[]])
 ```
 
 All the necessary pre-processing needed before clustering are performed using this function. This is why it is advisable to perform clustering before deconvolution.
@@ -177,7 +177,7 @@ To predict the cell types based on their similarities with a databases with cell
 
 ```{r deconvolution}
 pbmc3k <- sc_deconvolute(pbmc3k, pbmc3k, diagnosis = FALSE)
-head(pbmc3k@meta.data$predicted.id, 30)
+head(pbmc3k$predicted.id, 30)
 ```
 
 pbmc3k was used as the query and reference for sc_deconvolute. In a real scenario this would be wrong, since its going to give biased results, or impossible, because if the objective is to predict the cell type it means that we don't have them. Since this is just an example workflow, we think it's fine to leave it as is for demonstration purpose.
@@ -213,3 +213,10 @@ As we can see, the correlation between the clusters and cell type is pretty good
 problematic cell types are DC and platelet, which do not seem to appear in any cluster,
 because they are few compared to the other types; and memory and naive CD4 T cells,
 which share cluster 0, because they have a very similar transcriptome.
+
+# Session info
+
+```{r session-info}
+sessionInfo()
+```
+

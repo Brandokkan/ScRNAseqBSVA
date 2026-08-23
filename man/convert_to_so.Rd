@@ -45,8 +45,8 @@ convert_to_so(
 )
 }
 \arguments{
-\item{sc_data}{Object or path containing the single-cell data. See the Methods
-section below for supported input classes.}
+\item{sc_data}{Object or path containing the single-cell data. See the
+Methods section below for supported input classes.}
 
 \item{min.cells}{A gene must be expressed in at least this number of cells to
 be included. Default is \code{min.cells = 3}.}
@@ -81,15 +81,17 @@ suffix.
 \item \code{convert_to_so(character)}: Method for a file path to a supported
 single-cell data file (e.g. a .mtx or .csv file).
 
-\item \code{convert_to_so(dgCMatrix)}: Method for a sparse counts matrix of class
-\code{dgCMatrix}.
+\item \code{convert_to_so(dgCMatrix)}: Method for a sparse counts matrix of
+class \code{dgCMatrix}.
 
 }}
 \examples{
 mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
-mtx_mat <- convert_to_so(mat_path, gene_path = gene_path, bar_path = cell_path)
+mtx_mat <- convert_to_so(mat_path,
+    gene_path = gene_path, bar_path = cell_path
+)
 mtx_mat
 
 csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")

@@ -54,6 +54,7 @@ importFrom(grDevices,
   dev.cur,
   dev.set
 )
+importFrom(grid,grid.draw)
 importFrom(methods,
   setGeneric,
   setMethod
@@ -63,5 +64,8 @@ importFrom(stats,
   heatmap,
   quantile
 )
-importFrom(utils,read.csv)
+importFrom(utils,
+  head,
+  read.csv
+)
 importFrom(viridis,viridis)

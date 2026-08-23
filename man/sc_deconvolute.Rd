@@ -18,9 +18,10 @@ sc_deconvolute(so, ref, diagnosis = TRUE, lab_name = "label.main")
 \arguments{
 \item{so}{\code{SeuratObject} containing the cells}
 
-\item{ref}{the reference database used to predict the cell types in so. It must
-be one of: \code{SeuratObject}, \code{SummarizedExperiment} or \code{SingleCellExperiment}.
-examples are \code{pbmc3k} from SeuratData or \code{MouseRNAseqData} from celldex.}
+\item{ref}{the reference database used to predict the cell types in so. It
+must be one of: \code{SeuratObject}, \code{SummarizedExperiment} or
+\code{SingleCellExperiment}. examples are \code{pbmc3k} from SeuratData or
+\code{MouseRNAseqData} from celldex.}
 
 \item{diagnosis}{Boolean value to tell the function if it should also print
 plots and information regarding predicted cell types confidence.}
@@ -29,8 +30,8 @@ plots and information regarding predicted cell types confidence.}
 in the reference database.}
 }
 \value{
-the \code{SeuratObject} with the predicted cell types in the meta.data
-as "predictions".
+the \code{SeuratObject} with the predicted cell types in the
+meta.data as "predictions".
 }
 \description{
 This function use SingleR or Seurat, based on the type of reference database,
@@ -40,37 +41,38 @@ SummarizedExperiment and SingleCellExperiment.
 }
 \section{Functions}{
 \itemize{
-\item \code{sc_deconvolute(so = Seurat, ref = SummarizedExperiment)}: method used to predict cell types of a SeuratObject
-from a reference SummarizedExperiment dataset
+\item \code{sc_deconvolute(so = Seurat, ref = SummarizedExperiment)}: method
+used to predict cell types of a SeuratObject from a reference
+SummarizedExperiment dataset
 
 \item \code{sc_deconvolute(so = SummarizedExperiment, ref = SummarizedExperiment)}: method used to predict cell types in a
 SummarizedExperiment or SingleCellExperiment from a reference
 SummarizedExperiment or SingleCellExperiment dataset
 
-\item \code{sc_deconvolute(so = Seurat, ref = Seurat)}: method used to predict cell types in a
-SeuratObject from a reference SeuratObject
+\item \code{sc_deconvolute(so = Seurat, ref = Seurat)}: method used to predict
+cell types in a SeuratObject from a reference SeuratObject
 
 }}
 \examples{
 if (requireNamespace("celldex", quietly = TRUE)) {
-  suex_dataset <- celldex::MouseRNAseqData()
+    suex_dataset <- celldex::MouseRNAseqData()
 
-  # SummarizedExperiment on SummarizedExperiment method
-  sc_deconvolute(suex_dataset, suex_dataset)
+    # SummarizedExperiment on SummarizedExperiment method
+    sc_deconvolute(suex_dataset, suex_dataset)
 
-  if (requireNamespace("pbmc3k.SeuratData", quietly = TRUE)) {
-    e <- new.env()
-    data("pbmc3k", package = "pbmc3k.SeuratData", envir = e)
-    pbmc3k <- e$pbmc3k
-    pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
-    pbmc3k <- sc_normalization(pbmc3k)
-    pbmc3k <- sc_clustering(pbmc3k)
+    if (requireNamespace("pbmc3k.SeuratData", quietly = TRUE)) {
+        e <- new.env()
+        data("pbmc3k", package = "pbmc3k.SeuratData", envir = e)
+        pbmc3k <- e$pbmc3k
+        pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
+        pbmc3k <- sc_normalization(pbmc3k)
+        pbmc3k <- sc_clustering(pbmc3k)
 
-    # Seurat on SummarizedExperiment method
-    sc_deconvolute(pbmc3k, suex_dataset)
+        # Seurat on SummarizedExperiment method
+        sc_deconvolute(pbmc3k, suex_dataset)
 
-    # Seurat on Seurat method
-    sc_deconvolute(pbmc3k, pbmc3k)
-  }
+        # Seurat on Seurat method
+        sc_deconvolute(pbmc3k, pbmc3k)
+    }
 }
 }

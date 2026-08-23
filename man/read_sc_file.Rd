@@ -29,16 +29,18 @@ The output variable can be used for single-cell analysis
 }
 \section{Functions}{
 \itemize{
-\item \code{read_sc_file(character)}: Method for creating the corresponding single-cell
-variable from a file or multiple files. For .mtx files, a gene and cell
-barcodes must also be submitted in .tsv format
+\item \code{read_sc_file(character)}: Method for creating the corresponding
+single-cell variable from a file or multiple files. For .mtx files, a
+gene and cell barcodes must also be submitted in .tsv format
 
 }}
 \examples{
 mat_path <- system.file("extdata", "sc_test.mtx", package = "ScRNAseqBSVA")
 gene_path <- system.file("extdata", "genes.tsv", package = "ScRNAseqBSVA")
 cell_path <- system.file("extdata", "barcode.tsv", package = "ScRNAseqBSVA")
-mtx_mat <- read_sc_file(mat_path, gene_path = gene_path, bar_path = cell_path)
+mtx_mat <- read_sc_file(mat_path,
+    gene_path = gene_path, bar_path = cell_path
+)
 mtx_mat
 
 csv_path <- system.file("extdata", "sc_test.csv", package = "ScRNAseqBSVA")

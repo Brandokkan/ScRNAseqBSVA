@@ -32,7 +32,11 @@ utils::globalVariables(c("nFeature_RNA", "percent.mt"))
 #' list current rather than the one that was current before, so when more than
 #' one device is open the heatmap is silently drawn on the wrong one. Building
 #' the heatmap with \code{silent = TRUE} and restoring the original device
-#' before printing it keeps the plot where the caller expects it.
+#' before drawing it keeps the plot where the caller expects it.
+#'
+#' The gtable is drawn explicitly rather than through \code{print()}, which
+#' Bioconductor discourages outside \code{show} methods. This is exactly what
+#' \code{pheatmap:::print.pheatmap} does, so the output is unchanged.
 #'
 #' @param predictions the prediction \code{DFrame} returned by SingleR
 #'
@@ -40,17 +44,18 @@ utils::globalVariables(c("nFeature_RNA", "percent.mt"))
 #'
 #' @importFrom SingleR plotScoreHeatmap
 #' @importFrom grDevices dev.cur dev.set
+#' @importFrom grid grid.draw
 #' @noRd
 plot_prediction_scores <- function(predictions) {
-  dev_before <- dev.cur()
+    dev_before <- dev.cur()
 
-  scores <- plotScoreHeatmap(predictions, silent = TRUE)
+    scores <- plotScoreHeatmap(predictions, silent = TRUE)
 
-  # pheatmap's temporary device may have left another device current
-  if (dev_before != 1L && dev.cur() != dev_before) {
-    dev.set(dev_before)
-  }
+    # pheatmap's temporary device may have left another device current
+    if (dev_before != 1L && dev.cur() != dev_before) {
+        dev.set(dev_before)
+    }
 
-  print(scores)
-  invisible(scores)
+    grid.draw(scores$gtable)
+    invisible(scores)
 }

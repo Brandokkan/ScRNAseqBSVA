@@ -25,19 +25,19 @@ from \code{sc_clustering} to the cell labels predicted by
 }
 \section{Functions}{
 \itemize{
-\item \code{clu_dec_comparison(Seurat)}: method to compare the clustering and the
-deconvolution of \code{SeuratObjects}
+\item \code{clu_dec_comparison(Seurat)}: method to compare the clustering and
+the deconvolution of \code{SeuratObjects}
 
 }}
 \examples{
 if (requireNamespace("pbmc3k.SeuratData", quietly = TRUE)) {
-  data("pbmc3k", package = "pbmc3k.SeuratData")
-  pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
-  pbmc3k <- sc_normalization(pbmc3k)
-  pbmc3k <- sc_clustering(pbmc3k)
-  pbmc3k <- sc_deconvolute(pbmc3k, pbmc3k, diagnosis = FALSE)
+    data("pbmc3k", package = "pbmc3k.SeuratData")
+    pbmc3k <- Seurat::UpdateSeuratObject(pbmc3k)
+    pbmc3k <- sc_normalization(pbmc3k)
+    pbmc3k <- sc_clustering(pbmc3k)
+    pbmc3k <- sc_deconvolute(pbmc3k, pbmc3k, diagnosis = FALSE)
 
-  clu_dec_comparison(pbmc3k)
+    clu_dec_comparison(pbmc3k)
 }
 
 }
